@@ -1,5 +1,7 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
+
+import io.altar.jseproject.model.Shelf;
 	
 public class TextInterface {
 	public static void main(String[] args){
@@ -121,9 +123,12 @@ public class TextInterface {
 			}
 
 			System.out.println(pratinp);
+//			Object shelf
+			Shelf shelfObject = new Shelf(); 
 			
 			switch(pratinp){
 				case 1:
+					shelfObject.inpshelf();
 					break;
 				case 2:
 					break;
