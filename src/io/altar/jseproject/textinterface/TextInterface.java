@@ -1,86 +1,53 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
 
+import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
-public class TextInterface {
-	public static void main(String[] args){
-		
-		System.out.println("Bem Vindo ï¿½ Productdb\n");
-		menuinicial();
-	} 
+	public class TextInterface {
 
+		//Menu inicial
 		public static void menuinicial(){
-			Scanner scanner = new Scanner(System.in);
-			System.out.println("Por favor selecione uma das seguintes opcÃµes:");
-			System.out.println("1) Lista produtos");
-			System.out.println("2) Lista prateleiras");
-			System.out.println("3) Sair");
 			
-			int menuinp=0;
-
-				boolean valid = false;
-				while (!valid){
-					while(!scanner.hasNextInt()){
-						System.out.println("por favor introduza um caracter numÃ©rico");
-						scanner.next();
-					}
-					menuinp	= scanner.nextInt();
-					if((menuinp<1 || menuinp>3)){
-						System.out.println("Insira um valor entre 1 e 3\n");
-					}else{
-					valid = true;
-					}	
-				}
-
+			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
+			System.out.println("	1) Listar produtos");
+			System.out.println("	2) Listar prateleiras");
+			System.out.println("	3) Sair");
+	
+			int menuinp = getMenuInp(1, 3);
 				
 			switch(menuinp){
 				case 1: 
-					prodmenu(scanner);
+					prodmenu();
 					break;
 				case 2:
-					pratmenu(scanner);
+					pratmenu();
 					break;
 				case 3:
-					System.out.println("Thank you for using our aplication.\nGoodbye!!");
+					System.out.println(" Obrigado por ter usado o programa.\nAdeus!! ");
 					System.exit(0);
 					break;
 			}
 		}
 	
-		public static void prodmenu(Scanner scanner){	
-			System.out.println("Por favor selecione uma das seguintes opï¿½ï¿½es:");
-			System.out.println("1) Criar novo produto");
-			System.out.println("2) Editar um produto existente");
-			System.out.println("3) Consultar o detalhe de um produto");
-			System.out.println("4) Remover um produto");
-			System.out.println("5) Voltar ao ecrï¿½ anterior");
+		//Menu produtos
+		public static void prodmenu(){	
+			System.out.println("Tem os seguintes produtos em stock:");
+			Product productObject = new Product();
+			productObject.printproduct();
 			
-			int prodinp=0;
-
-
-			boolean valid = false;
-			while (!valid){
-				while(!scanner.hasNextInt()){
-					System.out.println("por favor introduza um caracter numÃ©rico");
-					scanner.next();
-				
-				}
-					prodinp	= scanner.nextInt();
-				if((prodinp<1 || prodinp>5)){
-					System.out.println("Insira um valor entre 1 e 5\n");
-				
-				}else{
-				valid = true;
-					
-				}
-				
-			}
-
-			System.out.println(prodinp);
+			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
+			System.out.println("	1) Criar novo produto");
+			System.out.println("	2) Editar um produto existente");
+			System.out.println("	3) Consultar o detalhe de um produto");
+			System.out.println("	4) Remover um produto");
+			System.out.println("	5) Voltar ao ecrï¿½ anterior");
 			
-			switch(prodinp){
+			int menuinp = getMenuInp(1, 5);
+			
+			switch(menuinp){
 				case 1:
+					productObject.newProd();
 					break;
 				case 2:
 					break;
@@ -94,51 +61,56 @@ public class TextInterface {
 			}
 		}
 		
-		public static void pratmenu(Scanner scanner){		
-			System.out.println("Por favor selecione uma das seguintes opï¿½ï¿½es:");
-			System.out.println("1) Criar nova prateleira");
-			System.out.println("2) Editar um produto existente");
-			System.out.println("3) Consultar o detalhe de um produto");
-			System.out.println("4) Remover um produto");
-			System.out.println("5) Voltar ao ecrï¿½ anterior");
+		//Menu das prateleiras
+		public static void pratmenu(){		
+			System.out.println("As prateleiras disponiveis são as seguintes:");
+			Shelf shelfObject = new Shelf();
+			shelfObject.printShelf();
 			
-			int pratinp = 0;
+			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
+			System.out.println("	1) Criar nova prateleira");
+			System.out.println("	2) Editar um produto existente");
+			System.out.println("	3) Consultar o detalhe de um produto");
+			System.out.println("	4) Remover um produto");
+			System.out.println("	5) Voltar ao ecrï¿½ anterior");
+	
+			int menuinp = getMenuInp(1, 5);
+				
+				switch(menuinp){
+					case 1:
+						shelfObject.newShelf();
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						menuinicial();
+						return;
+				}
+			}
+	
+		//Input menus com verificação
+		public static int getMenuInp(int min, int max){
+			
+			Scanner scanner = new Scanner(System.in);	
+			int menuinp=0;
 			
 			boolean valid = false;
 			while (!valid){
 				while(!scanner.hasNextInt()){
-					System.out.println("por favor introduza um caracter numÃ©rico");
+					System.out.println("por favor introduza um caracter numerico");
 					scanner.next();
-				
 				}
-					pratinp	= scanner.nextInt();
-				if((pratinp<1 || pratinp>5)){
-					System.out.println("Insira um valor entre 1 e 5\n");
-				
+				menuinp	= scanner.nextInt();
+				if((menuinp<min || menuinp>max)){
+					System.out.println("Insira um valor entre " + min + " e " +max);
 				}else{
-				valid = true;
-					
-				}
-				
+					valid = true;
+				}	
 			}
-
-			System.out.println(pratinp);
-//			Object shelf
-			Shelf shelfObject = new Shelf(); 
-			
-			switch(pratinp){
-				case 1:
-					shelfObject.inpshelf();
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-				case 5:
-					menuinicial();
-					return;
-			}
+			return menuinp;
 		}
 }

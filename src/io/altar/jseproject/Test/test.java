@@ -1,10 +1,19 @@
 package io.altar.jseproject.Test;
 
-public class test {
+import io.altar.jseproject.model.Product;
+import io.altar.jseproject.model.Shelf;
+import io.altar.jseproject.textinterface.TextInterface;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public class test {
+	
+		public static void main(String[] args){
+			
+			TextInterface textinterfaceObject = new TextInterface();
+			
+			System.out.println("|  Bem Vindo ao Productdb  |");
+			textinterfaceObject.menuinicial();
+			
+			} 
 	}
 
-}
+
