@@ -1,44 +1,43 @@
 package io.altar.jseproject.textinterface;
-
 	import java.util.Scanner;
-
-public class TextInterface {
 	
+public class TextInterface {
 	public static void main(String[] args){
 		
-		System.out.println("Bem Vindo à Productdb\n");
-		
-		TextInterface textInterfaceObject = new TextInterface();
-		textInterfaceObject.menuinicial();
-		
+		System.out.println("Bem Vindo ï¿½ Productdb\n");
+		menuinicial();
 	} 
 
-		public void menuinicial(){
-			
+		public static void menuinicial(){
+			Scanner scanner = new Scanner(System.in);
 			System.out.println("Por favor selecione uma das seguintes opcÃµes:");
 			System.out.println("1) Lista produtos");
 			System.out.println("2) Lista prateleiras");
 			System.out.println("3) Sair");
 			
-			int menuinp;
-			
-			Scanner input = new Scanner(System.in);
-			menuinp	= input.nextInt();
+			int menuinp=0;
 
-			while (menuinp<1 | menuinp>3){
-					
-					System.out.println("Insira um valor entre 1 e 3\n");
-					menuinp	= input.nextInt();
+				boolean valid = false;
+				while (!valid){
+					while(!scanner.hasNextInt()){
+						System.out.println("por favor introduza um caracter numÃ©rico");
+						scanner.next();
+					}
+					menuinp	= scanner.nextInt();
+					if((menuinp<1 || menuinp>3)){
+						System.out.println("Insira um valor entre 1 e 3\n");
+					}else{
+					valid = true;
+					}	
 				}
+
 				
 			switch(menuinp){
 				case 1: 
-					TextInterface textInterfaceObject1 = new TextInterface();
-					textInterfaceObject1.prodmenu();
+					prodmenu(scanner);
 					break;
 				case 2:
-					TextInterface textInterfaceObject2 = new TextInterface();
-					textInterfaceObject2.pratmenu();
+					pratmenu(scanner);
 					break;
 				case 3:
 					System.out.println("Thank you for using our aplication.\nGoodbye!!");
@@ -47,71 +46,94 @@ public class TextInterface {
 			}
 		}
 	
-		public void prodmenu(){	
-			System.out.println("Por favor selecione uma das seguintes opções:");
+		public static void prodmenu(Scanner scanner){	
+			System.out.println("Por favor selecione uma das seguintes opï¿½ï¿½es:");
 			System.out.println("1) Criar novo produto");
 			System.out.println("2) Editar um produto existente");
 			System.out.println("3) Consultar o detalhe de um produto");
 			System.out.println("4) Remover um produto");
-			System.out.println("5) Voltar ao ecrã anterior");
+			System.out.println("5) Voltar ao ecrï¿½ anterior");
 			
-			int prodinp;
-			Scanner input = new Scanner(System.in);
-			prodinp	= input.nextInt();
-			
-			while (prodinp<1 | prodinp>5){
-					
-					System.out.println("Insira um valor entre 1 e 5\n");
-					prodinp	= input.nextInt();
+			int prodinp=0;
+
+
+			boolean valid = false;
+			while (!valid){
+				while(!scanner.hasNextInt()){
+					System.out.println("por favor introduza um caracter numÃ©rico");
+					scanner.next();
+				
 				}
+					prodinp	= scanner.nextInt();
+				if((prodinp<1 || prodinp>5)){
+					System.out.println("Insira um valor entre 1 e 5\n");
+				
+				}else{
+				valid = true;
+					
+				}
+				
+			}
+
+			System.out.println(prodinp);
 			
 			switch(prodinp){
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				TextInterface textInterfaceObject = new TextInterface();
-				textInterfaceObject.menuinicial();
-				break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					menuinicial();
+					break;
 			}
 		}
 		
-		public void pratmenu(){		
-			System.out.println("Por favor selecione uma das seguintes opções:");
+		public static void pratmenu(Scanner scanner){		
+			System.out.println("Por favor selecione uma das seguintes opï¿½ï¿½es:");
 			System.out.println("1) Criar nova prateleira");
 			System.out.println("2) Editar um produto existente");
 			System.out.println("3) Consultar o detalhe de um produto");
 			System.out.println("4) Remover um produto");
-			System.out.println("5) Voltar ao ecrã anterior");
+			System.out.println("5) Voltar ao ecrï¿½ anterior");
 			
-			int pratinp;
-			Scanner input = new Scanner(System.in);
-			pratinp	= input.nextInt();
+			int pratinp = 0;
 			
-			while (pratinp<1 | pratinp>5){
+			boolean valid = false;
+			while (!valid){
+				while(!scanner.hasNextInt()){
+					System.out.println("por favor introduza um caracter numÃ©rico");
+					scanner.next();
 				
-				System.out.println("Insira um valor entre 1 e 5\n");
-				pratinp	= input.nextInt();
+				}
+					pratinp	= scanner.nextInt();
+				if((pratinp<1 || pratinp>5)){
+					System.out.println("Insira um valor entre 1 e 5\n");
+				
+				}else{
+				valid = true;
+					
+				}
+				
 			}
+
+			System.out.println(pratinp);
 			
 			switch(pratinp){
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				TextInterface textInterfaceObject = new TextInterface();
-				textInterfaceObject.menuinicial();
-				return;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					menuinicial();
+					return;
 			}
 		}
 }
