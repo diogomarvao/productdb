@@ -34,8 +34,7 @@ import io.altar.jseproject.model.Shelf;
 //Menu produtos
 		public static void prodmenu(){	
 			System.out.println("Tem os seguintes produtos em stock:");
-			Product productObject = new Product();
-			printProduct();
+			Product.printProduct();
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
 			System.out.println("	1) Criar novo produto");
@@ -62,15 +61,18 @@ import io.altar.jseproject.model.Shelf;
 			}
 		}
 		
+		private static int idProd = 0;
+		
 //		Criar novo produto
-		public static Product newProd(){
+		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
 			
-			int id = id + 1;
 			
+			idProd = idProd + 1;
 //			System.out.println("Insira as parteleiras: ");
 //			productListadd(prat);
-				
+			int prat = 0;
+			
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = dados.nextInt();
 			
@@ -80,17 +82,21 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
+			Product current = new Product();
 			
-			TextInterface textinterfaceObject = new TextInterface();
-			textinterfaceObject.prodmenu();
+		current.Product(idProd, prat, desconto, iva, pvp);	
+		prodmenu();
 		
 		}
 		
 //		Print da tabela
-		public static Product printProduct(id, desconto, iva, pvp){
-			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
-			System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
-		}
+//		public static void printProduct(int id, int prat, double desconto, int iva, double pvp){
+//			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
+//			for(Product p:Product.productList){
+//				System.out.println("|\t" + p.id + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
+//			};
+////			
+//		}
 		
 //Menu das prateleiras
 		public static void pratmenu(){		
@@ -109,7 +115,7 @@ import io.altar.jseproject.model.Shelf;
 				
 				switch(menuinp){
 					case 1:
-						shelfObject.newShelf();
+						newShelf();
 						break;
 					case 2:
 						break;
@@ -122,8 +128,34 @@ import io.altar.jseproject.model.Shelf;
 						return;
 				}
 			}
+		
+		private static int idShelf = 0;
+		
+////		Criar nova prateleira
+		public static void newShelf(){
+			Scanner dados = new Scanner(System.in);
+			
+			idShelf = idShelf + 1;
+			System.out.println("Insira a localizacao da parteleira: ");
+			int codigo = dados.nextInt();
+			
+			System.out.println("Insira a capacidade da parteleira: ");
+			int capacidade = dados.nextInt();
+			
+			System.out.println("Insira o ID do produto: ");
+			int produto = dados.nextInt();
+			
+			System.out.println("Insira o precode aluguer diario de localizacao: ");
+			double preco = dados.nextInt();
+			
+			Shelf current = new Shelf();
+			
+			current.Shelf(idShelf,codigo, capacidade, produto, preco);	
+			prodmenu();
+			
+			}
 	
-//Input menus com verifica��o
+//Input menus com verificacao
 		public static int getMenuInp(int min, int max){
 			
 			Scanner scanner = new Scanner(System.in);	

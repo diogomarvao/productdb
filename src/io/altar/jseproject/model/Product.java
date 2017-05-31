@@ -6,21 +6,30 @@ import java.util.Scanner;
 import io.altar.jseproject.textinterface.TextInterface;
 
 public class Product {
-	private int id;
-	private int prat[][];
-	private int desconto;
-	private int iva;
-	private int pvp;
-
-
-	public Product(int id, int[][] prat, int desconto, int iva, int pvp) {
-		this.id = id;
-		this.prat = prat;
-		this.desconto = desconto;
-		this.iva = iva;
-		this.pvp = pvp;
-	}
-
-	public static ArrayList<Product> productList = new ArrayList <Product>();
+		private int idProd;
+		private int prat;
+		private double desconto;
+		private int iva;
+		private double pvp;
 	
+		public static ArrayList<Product> productList = new ArrayList <Product>();
+		
+		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
+			this.idProd = idProd;
+			this.prat = prat;
+			this.desconto = desconto;
+			this.iva = iva;
+			this.pvp = pvp;
+			productList.add(this);
+			printProduct();
+		}
+		
+		public static void printProduct(){
+			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
+			System.out.println("-------------------------------------------------------------------------");
+			for(Product p:Product.productList){
+				System.out.println("|\t" + p.idProd + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
+			};
+	//		
+		}
 }
