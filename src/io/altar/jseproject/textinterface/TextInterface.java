@@ -1,12 +1,13 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
+	import io.altar.jseproject.model.Product;
 
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
 	public class TextInterface {
 
-		//Menu inicial
+//Menu inicial
 		public static void menuinicial(){
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
@@ -30,11 +31,11 @@ import io.altar.jseproject.model.Shelf;
 			}
 		}
 	
-		//Menu produtos
+//Menu produtos
 		public static void prodmenu(){	
 			System.out.println("Tem os seguintes produtos em stock:");
 			Product productObject = new Product();
-			productObject.printproduct();
+			printProduct();
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
 			System.out.println("	1) Criar novo produto");
@@ -47,7 +48,7 @@ import io.altar.jseproject.model.Shelf;
 			
 			switch(menuinp){
 				case 1:
-					productObject.newProd();
+					newProd();
 					break;
 				case 2:
 					break;
@@ -61,9 +62,39 @@ import io.altar.jseproject.model.Shelf;
 			}
 		}
 		
-		//Menu das prateleiras
+//		Criar novo produto
+		public static Product newProd(){
+			Scanner dados = new Scanner(System.in);
+			
+			int id = id + 1;
+			
+//			System.out.println("Insira as parteleiras: ");
+//			productListadd(prat);
+				
+			System.out.println("Insira o valor do desconto: ");
+			double desconto = dados.nextInt();
+			
+			System.out.println("Insira o valor do IVA: ");
+			int iva = dados.nextInt();
+			
+			System.out.println("Insira o PVP: ");
+			double pvp = dados.nextInt();
+			
+			
+			TextInterface textinterfaceObject = new TextInterface();
+			textinterfaceObject.prodmenu();
+		
+		}
+		
+//		Print da tabela
+		public static Product printProduct(id, desconto, iva, pvp){
+			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
+			System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
+		}
+		
+//Menu das prateleiras
 		public static void pratmenu(){		
-			System.out.println("As prateleiras disponiveis são as seguintes:");
+			System.out.println("As prateleiras disponiveis sï¿½o as seguintes:");
 			Shelf shelfObject = new Shelf();
 			shelfObject.printShelf();
 			
@@ -92,7 +123,7 @@ import io.altar.jseproject.model.Shelf;
 				}
 			}
 	
-		//Input menus com verificação
+//Input menus com verificaï¿½ï¿½o
 		public static int getMenuInp(int min, int max){
 			
 			Scanner scanner = new Scanner(System.in);	

@@ -12,7 +12,7 @@ public class Shelf {
 		private int produto;
 		private int preco;
 	
-
+//criar nova prateleira
 	public void newShelf(){
 		Scanner dados = new Scanner(System.in);
 		
@@ -33,7 +33,8 @@ public class Shelf {
 		TextInterface textinterfaceObject = new TextInterface();
 		textinterfaceObject. pratmenu();
 	}
-	
+
+//print da tabela
 	public static void printShelf(){
 		System.out.println("|\tID\t|\tLocalizacão\t|\tCapacidade\t| Produto\t|\tCusto(d)\t|");
 	}
