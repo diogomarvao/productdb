@@ -21,7 +21,26 @@ public class Product {
 			this.iva = iva;
 			this.pvp = pvp;
 			productList.add(this);
-			printProduct();
+		}
+		
+		public static void prodEleFind(int idEditP){
+			
+				int id=idEditP;
+				double desconto=productList.get(idEditP-1).desconto;
+				int iva=productList.get(idEditP-1).iva;
+				 double pvp=productList.get(idEditP-1).pvp;
+				TextInterface.prodEdit(id, desconto, iva, pvp);
+				
+			};	
+		
+		
+		public static void pEdit(int id, double desconto, int iva, double pvp){
+			
+			productList.get(id-1).desconto = desconto;
+			productList.get(id-1).iva = iva;
+			productList.get(id-1).pvp = pvp;
+			TextInterface.prodmenu();
+			
 		}
 		
 		public static void printProduct(){
