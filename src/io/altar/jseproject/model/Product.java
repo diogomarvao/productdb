@@ -58,10 +58,11 @@ public class Product {
 			Iterator it = productSet.iterator();
 			while(it.hasNext()){
 				System.out.println(it.next());
+				System.out.printf("|\t %d \t|\t %d \t\t|\t %d \t|\t %d \t|", idProd, desconto, iva, pvp);
 			}
-//			for(Product p:Product.productList){
-//				System.out.println("|\t" + p.idProd + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
-//			};
-	//		
+			for(Product p: productList){
+				System.out.println("|\t" + p.idProd + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
+			};
+			
 		}
 }
