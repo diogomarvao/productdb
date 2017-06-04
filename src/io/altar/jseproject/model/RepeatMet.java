@@ -33,7 +33,7 @@ public class RepeatMet {
 		}
 
 		
-//get id		
+//get id produtos	
 
 		public static int getId(){
 			Scanner getIdInp = new Scanner(System.in);
@@ -54,12 +54,6 @@ public class RepeatMet {
 				}	
 			}
 			return id;
-			
-		}
-		
-// delete element
-		
-		public static void delElem(){
 			
 		}
 		

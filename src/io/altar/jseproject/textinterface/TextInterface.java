@@ -56,6 +56,7 @@ import io.altar.jseproject.model.Shelf;
 					prodChars();
 					break;
 				case 4:
+					delProd();
 					break;
 				case 5:
 					menuinicial();
@@ -122,6 +123,12 @@ import io.altar.jseproject.model.Shelf;
 			Product.printChars();
 			prodmenu();
 		}
+		
+//Eliminar produto
+		public static void delProd(){
+			System.out.println("Insira o Id do produto que pretende eliminar");
+			Product.delElem();
+		}		
 				
 //Menu das prateleiras
 		public static void pratmenu(){		

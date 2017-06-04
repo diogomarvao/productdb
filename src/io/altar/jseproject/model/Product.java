@@ -15,8 +15,8 @@ public class Product extends RepeatMet {
 		private int iva;
 		private double pvp;
 	
-//		public static ArrayList<Product> productList = new ArrayList <Product>();
-//		public static LinkedHashMap <Integer, Product>productList = new LinkedHashMap<Integer, Product>();
+		
+//		setter vars
 		
 		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
 //			this.idProd = idProd;
@@ -25,15 +25,13 @@ public class Product extends RepeatMet {
 			this.iva = iva;
 			this.pvp = pvp;
 			productList.put(idProd, this);
-//			productList.add(this);
 		}
 		
+		
+//		Indentificar elementos do produto
+		
 		public static void prodEleFind(int idEditP){
-				int id=idEditP;
-//				double desconto=productList.get(idEditP-1).desconto;
-//				int iva=productList.get(idEditP-1).iva;
-//				double pvp=productList.get(idEditP-1).pvp;
-				
+				int id=idEditP;			
 				int prat = productList.get(id).prat;
 				double desconto = productList.get(id).desconto;
 				int iva = productList.get(id).iva;
@@ -43,6 +41,8 @@ public class Product extends RepeatMet {
 			};	
 		
 		
+//		getter das caraterisiticas no Linked hash map	
+		
 		public static void pEdit(int id, int prat, double desconto, int iva, double pvp){
 			
 			productList.get(id).desconto = desconto;
@@ -51,6 +51,9 @@ public class Product extends RepeatMet {
 			TextInterface.prodmenu();
 			
 		}
+
+		
+//Print da tabela do prod
 		
 		public static void printProduct(){
 			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
@@ -65,7 +68,7 @@ public class Product extends RepeatMet {
 //			};
 			
 		}
-//Mostrar caracteristicas do produto
+//print das caracteristicas do produto
 		public static void printChars(){
 			int id = getId();
 			int prat = productList.get(id).prat;
@@ -79,8 +82,26 @@ public class Product extends RepeatMet {
 			System.out.println("-------------------------------------------------------------------------\n");
 			
 		}
+		
+// delete element
+
+		public static void delElem(){
+			int id = getId();
+			System.out.println("Tem a certeza que prentende eliminar este produto da DB?");
+			int input = getMenuInp(1, 2);
+			switch(input){
+			case 1:
+				Object obj = productList.remove(id);
+				TextInterface.prodmenu();
+				break;
+			case 2:
+				TextInterface.prodmenu();
+				break;
+			}
+			
+		}
 	
-//getters
+//getters das variaveis
 		public int getIdProd(){
 			return idProd;
 		}
