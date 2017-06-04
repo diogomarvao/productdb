@@ -1,11 +1,11 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
 	import io.altar.jseproject.model.Product;
-
+import io.altar.jseproject.model.RepeatMet;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
-	public class TextInterface {
+	public class TextInterface extends RepeatMet {
 
 //Menu inicial
 		public static void menuinicial(){
@@ -53,6 +53,7 @@ import io.altar.jseproject.model.Shelf;
 					prodFind();
 					break;
 				case 3:
+					prodChars();
 					break;
 				case 4:
 					break;
@@ -67,12 +68,11 @@ import io.altar.jseproject.model.Shelf;
 //		Criar novo produto
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
-			
-			
+						
 			idProd = idProd + 1;
-//			System.out.println("Insira as parteleiras: ");
+			System.out.println("Insira as parteleiras: ");
 //			productListadd(prat);
-			int prat = 0;
+			int prat = dados.nextInt();
 			
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = dados.nextInt();
@@ -98,20 +98,31 @@ import io.altar.jseproject.model.Shelf;
 			Product.prodEleFind(idEditP);
 		}
 		
-		public static void prodEdit(int idProd, double desconto, int iva, double pvp){
+		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
+			System.out.println("Insira as prateleiras onde o produto está disposto");
+			System.out.print(prat + " -> ");
+			prat=getSkipDel(prat);
 			System.out.println("Insira o valor do desconto: ");
 			System.out.print(desconto + " -> ");
 			desconto = dados.nextInt();
 			System.out.println("Insira o valor do IVA: ");
 			System.out.print(iva  + " -> ");
-			iva = dados.nextInt();
+			iva = getSkipInt(iva);
+//			iva = dados.nextInt();
 			System.out.println("Insira o PVP: ");
 			System.out.print(pvp  + " -> ");
 			pvp = dados.nextInt();
-			Product.pEdit(idProd, desconto, iva, pvp);
+			Product.pEdit(idProd, prat, desconto, iva, pvp);
 		}
 		
+//Consultar detalhes do produto
+		public static void prodChars(){
+			System.out.println("Introduza o valor do ID do producto que pretende consultar ");
+			Product.printChars();
+			prodmenu();
+		}
+				
 //Menu das prateleiras
 		public static void pratmenu(){		
 			System.out.println("As prateleiras disponiveis sï¿½o as seguintes:");
@@ -169,7 +180,7 @@ import io.altar.jseproject.model.Shelf;
 			
 			}
 
-//			Editar um produto		
+//			Editar uma prat		
 		public static void pratFind(){
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira o ID da prateleira que pretende editar");
@@ -181,38 +192,17 @@ import io.altar.jseproject.model.Shelf;
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira a localizacao da parteleira: ");
 			System.out.print(codigo + " -> ");
-			codigo = dados.nextInt();
+			codigo = getSkipInt(codigo);
 			System.out.println("Insira a capacidade da parteleira: ");
 			System.out.print(capacidade  + " -> ");
-			capacidade = dados.nextInt();
+			capacidade = getSkipInt(capacidade);
 			System.out.println("Insira o ID do produto: ");
 			System.out.print(produto  + " -> ");
-			produto = dados.nextInt();
+			produto = getSkipDel(produto);
 			System.out.println("Insira o precode aluguer diario de localizacao: ");
 			System.out.print(preco  + " -> ");
 			preco = dados.nextInt();
 			Shelf.sEdit(idShelf, codigo, capacidade, produto, preco);
 		}
 				
-//		Input menus com verificacao
-		public static int getMenuInp(int min, int max){
-			
-			Scanner scanner = new Scanner(System.in);	
-			int menuinp=0;
-			
-			boolean valid = false;
-			while (!valid){
-				while(!scanner.hasNextInt()){
-					System.out.println("por favor introduza um caracter numerico");
-					scanner.next();
-				}
-				menuinp	= scanner.nextInt();
-				if((menuinp<min || menuinp>max)){
-					System.out.println("Insira um valor entre " + min + " e " +max);
-				}else{
-					valid = true;
-				}	
-			}
-			return menuinp;
-		}
 }

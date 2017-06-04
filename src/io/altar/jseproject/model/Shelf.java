@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 import io.altar.jseproject.textinterface.TextInterface;
 
-public class Shelf {
+public class Shelf extends RepeatMet {
 		private int idShelf;
 		private int codigo;
 		private int capacidade;
 		private int produto;
 		private double preco;
 	
-		public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
+//		public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
 		
 		public void Shelf(int idShelf, int codigo, int capacidade, int produto, double preco) {
 			this.idShelf = idShelf;
@@ -54,6 +54,7 @@ public class Shelf {
 			};
 //			
 		}
+		
 	}
 		
 		
