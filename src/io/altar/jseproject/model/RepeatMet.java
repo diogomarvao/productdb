@@ -48,7 +48,7 @@ public class RepeatMet {
 				}
 				id	= getIdInp.nextInt();
 				if(id<0 || id>productList.size()){
-					System.out.println("Insira um valor entre " + 0 + " e " + (productList.size()-1) );
+					System.out.println("Insira um valor entre " + 1 + " e " + productList.size() );
 				}else{
 					valid = true;
 				}	

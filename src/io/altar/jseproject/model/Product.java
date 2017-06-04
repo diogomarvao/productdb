@@ -48,7 +48,6 @@ public class Product extends RepeatMet {
 			productList.get(id).desconto = desconto;
 			productList.get(id).iva = iva;
 			productList.get(id).pvp = pvp;
-			TextInterface.prodmenu();
 			
 		}
 
@@ -58,11 +57,20 @@ public class Product extends RepeatMet {
 		public static void printProduct(){
 			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
 			System.out.println("-------------------------------------------------------------------------");
-			Set productSet = productList.entrySet();
-			Iterator it = productSet.iterator();
-			while(it.hasNext()){
-				System.out.println(it.next());
+			
+			for(int eq = 0; eq<productList.size(); eq++ ){
+				int id = eq + 1;
+				int prat = productList.get(eq).prat;
+				double desconto = productList.get(eq).desconto;
+				int iva = productList.get(eq).iva;
+				double pvp = productList.get(eq).pvp;	
+				System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
 			}
+//			Set productSet = productList.entrySet();
+//			Iterator it = productSet.iterator();
+//			while(it.hasNext()){
+//				System.out.println(it.next());
+//			}
 //			for(Product p: productList){
 //				System.out.println("|\t" + p.idProd + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
 //			};
