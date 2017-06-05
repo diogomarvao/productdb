@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
-public class RepeatMet {
+public class Entity {
 
-	public static LinkedHashMap <Integer, Product>productList = new LinkedHashMap<Integer, Product>();
-	public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
-	
 	
 //Input menus com verificacao
 		public static int getMenuInp(int min, int max){

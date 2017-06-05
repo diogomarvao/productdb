@@ -1,11 +1,13 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
-	import io.altar.jseproject.model.Product;
-import io.altar.jseproject.model.RepeatMet;
+
+import io.altar.jseproject.Repository.EntityRepository;
+import io.altar.jseproject.model.Entity;
+import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
-	public class TextInterface extends RepeatMet {
+	public class TextInterface extends Entity {
 
 //Menu inicial
 		public static void menuinicial(){
@@ -64,13 +66,11 @@ import io.altar.jseproject.model.Shelf;
 			}
 		}
 		
-		private static int idProd = 0;
-		
 //		Criar novo produto
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
 						
-			idProd = idProd + 1;
+			int idProd = EntityRepository.getNextId();
 			System.out.println("Insira as parteleiras: ");
 //			productListadd(prat);
 			int prat = dados.nextInt();
@@ -101,7 +101,7 @@ import io.altar.jseproject.model.Shelf;
 		
 		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
-			System.out.println("Insira as prateleiras onde o produto está disposto");
+			System.out.println("Insira as prateleiras onde o produto estï¿½ disposto");
 			System.out.print(prat + " -> ");
 			prat=getSkipDel(prat);
 			System.out.println("Insira o valor do desconto: ");
@@ -110,7 +110,7 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o valor do IVA: ");
 			System.out.print(iva  + " -> ");
 			iva = getSkipInt(iva);
-//			iva = dados.nextInt();
+			iva = dados.nextInt();
 			System.out.println("Insira o PVP: ");
 			System.out.print(pvp  + " -> ");
 			pvp = dados.nextInt();

@@ -6,9 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Set;
 
+import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.textinterface.TextInterface;
 
-public class Product extends RepeatMet {
+public class Product extends Entity {
 		private int idProd;
 		private int prat;
 		private double desconto;
@@ -16,23 +17,11 @@ public class Product extends RepeatMet {
 		private double pvp;
 	
 		
-//		setter vars
-		
-		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
-//			this.idProd = idProd;
-			this.prat = prat;
-			this.desconto = desconto;
-			this.iva = iva;
-			this.pvp = pvp;
-			productList.put(idProd, this);
-		}
-		
-		
 //		Indentificar elementos do produto
 		
 		public static void prodEleFind(int idEditP){
 				int id=idEditP;			
-				int prat = productList.get(id).prat;
+				int prat = ProductRepository.getInstance(id).prat;
 				double desconto = productList.get(id).desconto;
 				int iva = productList.get(id).iva;
 				double pvp = productList.get(id).pvp;
@@ -40,15 +29,26 @@ public class Product extends RepeatMet {
 				TextInterface.prodEdit(id, prat, desconto, iva, pvp);
 			};	
 		
+			
+//			inserir produto no Array
 		
-//		getter das caraterisiticas no Linked hash map	
+		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
+//				this.idProd = idProd;
+			this.prat = prat;
+			this.desconto = desconto;
+			this.iva = iva;
+			this.pvp = pvp;
+			productList.put(idProd, this);
+		}
+			
+//		substituir as caraterisiticas no Linked hash map	
 		
 		public static void pEdit(int id, int prat, double desconto, int iva, double pvp){
 			
 			productList.get(id).desconto = desconto;
 			productList.get(id).iva = iva;
 			productList.get(id).pvp = pvp;
-			
+			TextInterface.prodmenu();
 		}
 
 		
@@ -58,24 +58,16 @@ public class Product extends RepeatMet {
 			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
 			System.out.println("-------------------------------------------------------------------------");
 			
-			for(int eq = 0; eq<productList.size(); eq++ ){
-				int id = eq + 1;
+			for(int eq = 1; eq<productList.size(); eq++ ){
+				int id = eq;
 				int prat = productList.get(eq).prat;
 				double desconto = productList.get(eq).desconto;
 				int iva = productList.get(eq).iva;
 				double pvp = productList.get(eq).pvp;	
 				System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
-			}
-//			Set productSet = productList.entrySet();
-//			Iterator it = productSet.iterator();
-//			while(it.hasNext()){
-//				System.out.println(it.next());
-//			}
-//			for(Product p: productList){
-//				System.out.println("|\t" + p.idProd + "\t|\t" + p.desconto + "\t\t|\t" + p.iva + "\t|\t" + p.pvp + "\t|");
-//			};
-			
+			}	
 		}
+		
 //print das caracteristicas do produto
 		public static void printChars(){
 			int id = getId();

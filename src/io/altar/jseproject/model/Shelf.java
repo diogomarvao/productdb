@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import io.altar.jseproject.textinterface.TextInterface;
 
-public class Shelf extends RepeatMet {
+public class Shelf extends Entity {
 		private int idShelf;
 		private int codigo;
 		private int capacidade;
