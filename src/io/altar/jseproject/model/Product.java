@@ -20,28 +20,10 @@ public class Product extends Entity {
 		
 //		Indentificar elementos do produto
 		
-		public static void prodEleFind(int idEditP){
-				int id=idEditP;			
-				int prat = ProductRepository.getInstance(id).prat;
-				double desconto = productList.get(id).desconto;
-				int iva = productList.get(id).iva;
-				double pvp = productList.get(id).pvp;
-				
-				TextInterface.prodEdit(id, prat, desconto, iva, pvp);
+		public static void prodEleFind(int idEditP){		
+				ProductRepository.getProdElem(idEditP);
 			};	
 		
-			
-//			inserir produto no Array
-		
-		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
-			EntityRepository.addProd(idProd, prat, desconto, iva, pvp);
-//			this.idProd = idProd;
-//			this.prat = prat;
-//			this.desconto = desconto;
-//			this.iva = iva;
-//			this.pvp = pvp;
-//			productList.put(idProd, this);
-		}
 		
 //		substituir as caraterisiticas no Linked hash map	
 		
@@ -82,44 +64,27 @@ public class Product extends Entity {
 			
 		}
 		
-// delete element
-
-		public static void delElem(){
-			int id = getId();
-			System.out.println("Tem a certeza que prentende eliminar este produto da DB?");
-			int input = getMenuInp(1, 2);
-			switch(input){
-			case 1:
-				EntityRepository.delProd(int id);
-				TextInterface.prodmenu();
-				break;
-			case 2:
-				TextInterface.prodmenu();
-				break;
-			}
-			
-		}
 	
 //getters das variaveis
-		public int getIdProd(){
-			return idProd;
-		}
-		
-		public int getPrat(){
-			return prat;
-		}
-		
-		public double getDesconto(){
-			return desconto;
-		}
-		
-		public int getIva(){
-			return iva;
-		}
-		
-		public double getPvp(){
-			return pvp;
-		}
+//		public int getIdProd(){
+//			return idProd;
+//		}
+//		
+//		public int getPrat(){
+//			return prat;
+//		}
+//		
+//		public double getDesconto(){
+//			return desconto;
+//		}
+//		
+//		public int getIva(){
+//			return iva;
+//		}
+//		
+//		public double getPvp(){
+//			return pvp;
+//		}
 			
 }
 		

@@ -1,13 +1,14 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
 
+import io.altar.jseproject.util.Utils;
 import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
-	public class TextInterface extends Entity {
+	public class TextInterface{
 
 //Menu inicial
 		public static void menuinicial(){
@@ -17,7 +18,7 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("	2) Listar prateleiras");
 			System.out.println("	3) Sair");
 	
-			int menuinp = getMenuInp(1, 3);
+			int menuinp = Utils.getMenuInp(1, 3);
 				
 			switch(menuinp){
 				case 1: 
@@ -45,7 +46,7 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("	4) Remover um produto");
 			System.out.println("	5) Voltar ao ecr� anterior");
 			
-			int menuinp = getMenuInp(1, 5);
+			int menuinp = Utils.getMenuInp(1, 5);
 			
 			switch(menuinp){
 				case 1:
@@ -70,7 +71,7 @@ import io.altar.jseproject.model.Shelf;
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
 						
-			int idProd = EntityRepository.getNextId();
+			int idProd = EntityRepository.getNextIdProd();
 			System.out.println("Insira as parteleiras: ");
 //			productListadd(prat);
 			int prat = dados.nextInt();
@@ -103,13 +104,13 @@ import io.altar.jseproject.model.Shelf;
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira as prateleiras onde o produto est� disposto");
 			System.out.print(prat + " -> ");
-			prat=getSkipDel(prat);
+			prat=Utils.getSkipDel(prat);
 			System.out.println("Insira o valor do desconto: ");
 			System.out.print(desconto + " -> ");
 			desconto = dados.nextInt();
 			System.out.println("Insira o valor do IVA: ");
 			System.out.print(iva  + " -> ");
-			iva = getSkipInt(iva);
+			iva = Utils.getSkipInt(iva);
 			iva = dados.nextInt();
 			System.out.println("Insira o PVP: ");
 			System.out.print(pvp  + " -> ");
@@ -127,7 +128,7 @@ import io.altar.jseproject.model.Shelf;
 //Eliminar produto
 		public static void delProd(){
 			System.out.println("Insira o Id do produto que pretende eliminar");
-			Product.delElem();
+			EntityRepository.delElem();
 		}		
 				
 //Menu das prateleiras
@@ -142,7 +143,7 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("	4) Remover prateleira");
 			System.out.println("	5) Voltar ao ecr� anterior");
 	
-			int menuinp = getMenuInp(1, 5);
+			int menuinp = Utils.getMenuInp(1, 5);
 				
 				switch(menuinp){
 					case 1:
@@ -199,13 +200,13 @@ import io.altar.jseproject.model.Shelf;
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira a localizacao da parteleira: ");
 			System.out.print(codigo + " -> ");
-			codigo = getSkipInt(codigo);
+			codigo = Utils.getSkipInt(codigo);
 			System.out.println("Insira a capacidade da parteleira: ");
 			System.out.print(capacidade  + " -> ");
-			capacidade = getSkipInt(capacidade);
+			capacidade = Utils.getSkipInt(capacidade);
 			System.out.println("Insira o ID do produto: ");
 			System.out.print(produto  + " -> ");
-			produto = getSkipDel(produto);
+			produto = Utils.getSkipDel(produto);
 			System.out.println("Insira o precode aluguer diario de localizacao: ");
 			System.out.print(preco  + " -> ");
 			preco = dados.nextInt();
