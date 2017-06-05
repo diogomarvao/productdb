@@ -6,6 +6,18 @@ import java.util.Scanner;
 
 public class Entity {
 
+	private int id;
+	
+	
+	public int getId(){
+		return id;	
+	}
+	
+	
+	public void setId(int id){
+		this.id = id;
+		
+	}
 	
 //Input menus com verificacao
 		public static int getMenuInp(int min, int max){
@@ -32,27 +44,27 @@ public class Entity {
 		
 //get id produtos	
 
-		public static int getId(){
-			Scanner getIdInp = new Scanner(System.in);
-			
-			int id = 0;
-			
-			boolean valid = false;
-			while (!valid){
-				while(!getIdInp.hasNextInt()){
-					System.out.println("por favor introduza um caracter numerico");
-					getIdInp.next();
-				}
-				id	= getIdInp.nextInt();
-				if(id<0 || id>productList.size()){
-					System.out.println("Insira um valor entre " + 1 + " e " + productList.size() );
-				}else{
-					valid = true;
-				}	
-			}
-			return id;
-			
-		}
+//		public static int getId(){
+//			Scanner getIdInp = new Scanner(System.in);
+//			
+//			int id = 0;
+//			
+//			boolean valid = false;
+//			while (!valid){
+//				while(!getIdInp.hasNextInt()){
+//					System.out.println("por favor introduza um caracter numerico");
+//					getIdInp.next();
+//				}
+//				id	= getIdInp.nextInt();
+//				if(id<0 || id>productList.size()){
+//					System.out.println("Insira um valor entre " + 1 + " e " + productList.size() );
+//				}else{
+//					valid = true;
+//				}	
+//			}
+//			return id;
+//			
+//		}
 		
 //Skip com enter int	
 		public static int getSkipInt(int y){

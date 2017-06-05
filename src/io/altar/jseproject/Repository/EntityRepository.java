@@ -9,42 +9,38 @@ import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 
-public abstract class EntityRepository <Product extends Entity> {
-	private Map <Long, Product>productList = new LinkedHashMap<Long, Product>();
+public class EntityRepository<E extends Entity> {
+	private Integer id = 0;
+//	private LinkedHashMap<Integer ,Entity> entityList = new LinkedHashMap<>();
+	private LinkedHashMap <Integer, Product>productList = new LinkedHashMap<Integer, Product>();
 	public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
 	
-	private long index = 0;
-	
-	protected Long getNextId() {
-		return ++index;
+	public Integer getNextId() {
+		return ++id;
 	}
+	
+	public void addElement(Product product){
+		product.setId(getNextId());
+		
+	}
+	
+	public void addProd(Product product) {
+		product.setId(getNextId());
+		productList.put(product.getId(),product);
+		
+	}
+	
+	public static void delProd(int id){
+		productList.remove(id);
+	}
+	
+	
+	
 	
 	public Product findById(long id){
 		return productList.get(id);
+		
 	}
 		
-	
-//getters das variaveis
-	public Product getCollection(long id){
-		Collection<Product> values = productList.values();
-		return values;
-	}
-	
-	public Product getPrat(long id){
-		return findById(id).prat;
-	}
-	
-	public Product getDesconto(long id){
-		return findById(id).desconto;
-	}
-	
-	public Product getIva(long id){
-		return findById(id).iva;
-	}
-	
-	public Product getPvp(long id){
-		return findById(id).pvp;
-	}
-			
 }	
 

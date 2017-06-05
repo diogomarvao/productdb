@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Set;
 
+import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.textinterface.TextInterface;
 
@@ -33,24 +34,22 @@ public class Product extends Entity {
 //			inserir produto no Array
 		
 		public void Product(int idProd, int prat, double desconto, int iva, double pvp) {
-//				this.idProd = idProd;
-			this.prat = prat;
-			this.desconto = desconto;
-			this.iva = iva;
-			this.pvp = pvp;
-			productList.put(idProd, this);
+			EntityRepository.addProd(idProd, prat, desconto, iva, pvp);
+//			this.idProd = idProd;
+//			this.prat = prat;
+//			this.desconto = desconto;
+//			this.iva = iva;
+//			this.pvp = pvp;
+//			productList.put(idProd, this);
 		}
-			
+		
 //		substituir as caraterisiticas no Linked hash map	
 		
 		public static void pEdit(int id, int prat, double desconto, int iva, double pvp){
-			
-			productList.get(id).desconto = desconto;
-			productList.get(id).iva = iva;
-			productList.get(id).pvp = pvp;
-			TextInterface.prodmenu();
+		ProductRepository.alterElement(id, prat, desconto, iva, pvp);
 		}
-
+		
+		
 		
 //Print da tabela do prod
 		
@@ -91,7 +90,7 @@ public class Product extends Entity {
 			int input = getMenuInp(1, 2);
 			switch(input){
 			case 1:
-				Object obj = productList.remove(id);
+				EntityRepository.delProd(int id);
 				TextInterface.prodmenu();
 				break;
 			case 2:
