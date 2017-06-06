@@ -3,6 +3,7 @@ package io.altar.jseproject.Repository;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
@@ -10,37 +11,37 @@ import io.altar.jseproject.model.Shelf;
 import io.altar.jseproject.textinterface.TextInterface;
 import io.altar.jseproject.util.Utils;
 
-public class EntityRepository<Product extends Entity> {
-	private LinkedHashMap <Integer, Product>productList = new LinkedHashMap<Integer, Product>();
-	public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
-	private int idProd = 0;
-		
+public class EntityRepository<E extends Entity> {
+	private LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
+
+//gerar ids	
 	
-	public int getNextIdProd(){
+	private int id = 0;
 		
-		return ++idProd;
-	
+	public int getNextId(){	
+		return ++id;
 	}
 
-//Adicionar produto
-	public void addProd(int idProd, int prat, double desconto, int iva, double pvp){
-			this.idProd = idProd;
-			this.prat = prat;
-			this.desconto = desconto;
-			this.iva = iva;
-			this.pvp = pvp;
-			productList.put(idProd, this);
-		};
+	
+//Adicionar a lista	
+	
+	public void addToList(Entity entity){
+		entity.setId(getNextId());
+		entityList.put(entity.getId(), entity);
+	}
+
+//Receber o id do elemento
+	public Entity get(int id){
+		return entityList.get(id);
+	}
 	
 // delete produto
 
-	public static void delElem(){
-		int id = Entity.getId();
-		System.out.println("Tem a certeza que prentende eliminar este produto da DB?");
+	public static void delElem(int id){
 		int input = Utils.getMenuInp(1, 2);
 		switch(input){
 		case 1:
-			productList.remove(id);
+			entityList.remove(id);
 			TextInterface.prodmenu();
 			break;
 		case 2:

@@ -3,6 +3,7 @@ package io.altar.jseproject.textinterface;
 
 import io.altar.jseproject.util.Utils;
 import io.altar.jseproject.Repository.EntityRepository;
+import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Product;
@@ -37,7 +38,7 @@ import io.altar.jseproject.model.Shelf;
 //Menu produtos
 		public static void prodmenu(){	
 			System.out.println("Tem os seguintes produtos em stock:");
-			Product.printProduct();
+			printProduct();
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
 			System.out.println("	1) Criar novo produto");
@@ -69,11 +70,11 @@ import io.altar.jseproject.model.Shelf;
 		
 //		Criar novo produto
 		public static void newProd(){
+
 			Scanner dados = new Scanner(System.in);
 						
-			int idProd = EntityRepository.getNextIdProd();
 			System.out.println("Insira as parteleiras: ");
-//			productListadd(prat);
+
 			int prat = dados.nextInt();
 			
 			System.out.println("Insira o valor do desconto: ");
@@ -85,19 +86,17 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
-			Product current = new Product();
+			Product p = new Product(prat, desconto, iva, pvp);
 			
-		current.Product(idProd, prat, desconto, iva, pvp);	
 		prodmenu();
 		
 		}
 
 //Editar um produto		
 		public static void prodFind(){
-			Scanner dados = new Scanner(System.in);
-			System.out.println("Insira o ID doproduto que pretende editar");
-			int idEditP = dados.nextInt();
-			Product.prodEleFind(idEditP);
+			System.out.println("Insira o ID do produto que pretende editar");
+			int id = Entity.inputId();
+			ProductRepository.getProdElem(id);
 		}
 		
 		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
@@ -115,20 +114,33 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o PVP: ");
 			System.out.print(pvp  + " -> ");
 			pvp = dados.nextInt();
-			Product.pEdit(idProd, prat, desconto, iva, pvp);
+			ProductRepository.alterElement(idProd, prat, desconto, iva, pvp);
+			prodmenu();
 		}
 		
 //Consultar detalhes do produto
 		public static void prodChars(){
 			System.out.println("Introduza o valor do ID do producto que pretende consultar ");
-			Product.printChars();
+			int id = Entity.inputId();
+			ProductRepository.getProdDet(id);
+		}
+		
+//print dos detalhes do produto
+		
+		public static void printDetails(int id, int prat, double desconto, int iva, double pvp){
+			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
+			System.out.println("-------------------------------------------------------------------------");
+			System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
+			System.out.println("-------------------------------------------------------------------------\n");
 			prodmenu();
 		}
 		
 //Eliminar produto
 		public static void delProd(){
 			System.out.println("Insira o Id do produto que pretende eliminar");
-			EntityRepository.delElem();
+			int id = Entity.inputId();
+			System.out.println("Tem a certeza que prentende eliminar este produto da DB?/n 1 -> Eliminar/n 2 -> Cancelar");
+			EntityRepository.delElem(id);
 		}		
 				
 //Menu das prateleiras
@@ -212,5 +224,14 @@ import io.altar.jseproject.model.Shelf;
 			preco = dados.nextInt();
 			Shelf.sEdit(idShelf, codigo, capacidade, produto, preco);
 		}
-				
-}
+		
+		public static void printProduct(){
+			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
+			System.out.println("-------------------------------------------------------------------------");
+			Product.valProduct();		
+		}
+		
+		public static void printProductVal(int id, int prat, double desconto, int iva, double pvp){
+			System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
+					}
+	}		

@@ -15,76 +15,70 @@ public class Product extends Entity {
 		private int prat;
 		private double desconto;
 		private int iva;
-		private double pvp;
-	
-		
-//		Indentificar elementos do produto
-		
-		public static void prodEleFind(int idEditP){		
-				ProductRepository.getProdElem(idEditP);
-			};	
-		
-		
-//		substituir as caraterisiticas no Linked hash map	
-		
-		public static void pEdit(int id, int prat, double desconto, int iva, double pvp){
-		ProductRepository.alterElement(id, prat, desconto, iva, pvp);
-		}
-		
-		
-		
-//Print da tabela do prod
-		
-		public static void printProduct(){
-			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
-			System.out.println("-------------------------------------------------------------------------");
-			
-			for(int eq = 1; eq<productList.size(); eq++ ){
-				int id = eq;
-				int prat = productList.get(eq).prat;
-				double desconto = productList.get(eq).desconto;
-				int iva = productList.get(eq).iva;
-				double pvp = productList.get(eq).pvp;	
-				System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
-			}	
-		}
-		
-//print das caracteristicas do produto
-		public static void printChars(){
-			int id = getId();
-			int prat = productList.get(id).prat;
-			double desconto = productList.get(id).desconto;
-			int iva = productList.get(id).iva;	
-			double pvp = productList.get(id).pvp;
+		private double pvp;		
 
-			System.out.println("|\tID\t|\tDesconto\t|\tIVA\t|\tPVP\t|");
-			System.out.println("-------------------------------------------------------------------------");
-			System.out.println("|\t" + id + "\t|\t" + desconto + "\t\t|\t" + iva + "\t|\t" + pvp + "\t|");
-			System.out.println("-------------------------------------------------------------------------\n");
-			
+//setters das variaveis
+		
+		public void setPrat(int prat){
+			this.prat=prat;
 		}
 		
-	
+		public void setDesconto(double desconto){
+			this.desconto=desconto;
+		}
+		
+		public void setIva(int iva){
+			this.iva=iva;
+		}
+		
+		public void setPvp(double pvp){
+			this.pvp=pvp;
+		}
+		
 //getters das variaveis
-//		public int getIdProd(){
-//			return idProd;
-//		}
-//		
-//		public int getPrat(){
-//			return prat;
-//		}
-//		
-//		public double getDesconto(){
-//			return desconto;
-//		}
-//		
-//		public int getIva(){
-//			return iva;
-//		}
-//		
-//		public double getPvp(){
-//			return pvp;
-//		}
+
+		public int getPrat(){
+			return this.prat;
+		}
+		
+		public double getDesconto(){
+			return this.desconto;
+		}
+		
+		public int getIva(){
+			return this.iva;
+		}
+		
+		public double getPvp(){
+			return this.pvp;
+		}
+				
+//adicionar ao repositorio variaveis
+		public Product(int prat, double desconto, int iva, double pvp) {
+			this.prat = prat;
+			this.desconto = desconto;
+			this.iva = iva;
+			this.pvp = pvp;
+			ProductRepository.getInstance().addToList(this);
+		}
+		
+		
+//Print valores da tabela do prod
+		
+	public static void valProduct(){
+		for(Interger i : entityList.keySet()){
 			
+		}
+				
+//				int i = 1; i<entityList.size(); i++ ){
+//			int id = i;
+//			int prat = ((Product)ProductRepository.getInstance().get(id)).getPrat();
+//			double desconto = ((Product)ProductRepository.getInstance().get(id)).getDesconto();
+//			int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
+//			double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
+//			TextInterface.printProductVal (id, prat, desconto, iva, pvp);
+//		}	
+	}
+		
 }
 		
