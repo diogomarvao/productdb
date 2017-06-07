@@ -12,10 +12,19 @@ import io.altar.jseproject.textinterface.TextInterface;
 import io.altar.jseproject.util.Utils;
 
 public class EntityRepository<E extends Entity> {
-	private LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
+	private static LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
 
 //gerar ids	
 	
+	public static LinkedHashMap<Integer, Entity> getEntityList() {
+		return entityList;
+	}
+
+
+	public static void setEntityList(LinkedHashMap<Integer, Entity> entityList) {
+		EntityRepository.entityList = entityList;
+	}
+
 	private int id = 0;
 		
 	public int getNextId(){	
@@ -31,25 +40,18 @@ public class EntityRepository<E extends Entity> {
 	}
 
 //Receber o id do elemento
+	
 	public Entity get(int id){
 		return entityList.get(id);
 	}
 	
-// delete produto
+// delete do elemento
 
-	public static void delElem(int id){
-		int input = Utils.getMenuInp(1, 2);
-		switch(input){
-		case 1:
-			entityList.remove(id);
-			TextInterface.prodmenu();
-			break;
-		case 2:
-			TextInterface.prodmenu();
-			break;
-		}
+	public static void removElem(int id){
 		
-	}
+			entityList.remove(id);
+					
+	}	
 	
 }	
 

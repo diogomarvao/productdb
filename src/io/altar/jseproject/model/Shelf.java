@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import io.altar.jseproject.Repository.EntityRepository;
+import io.altar.jseproject.Repository.ProductRepository;
+import io.altar.jseproject.Repository.ShelfRepository;
 import io.altar.jseproject.textinterface.TextInterface;
+import io.altar.jseproject.util.Utils;
 
 public class Shelf extends Entity {
 		private int idShelf;
@@ -13,66 +17,66 @@ public class Shelf extends Entity {
 		private int produto;
 		private double preco;
 	
-//		public static ArrayList<Shelf> shelfList = new ArrayList <Shelf>();
+//setters das variaveis	
 		
-		public void Shelf(int idShelf, int codigo, int capacidade, int produto, double preco) {
-			this.idShelf = idShelf;
+		public void setCod(int codigo){
+			this.codigo=codigo;
+		}
+		
+		public void setCap(int capacidade){
+			this.capacidade=capacidade;
+		}
+		
+		public void setProd(int produto){
+			this.produto=produto;
+		}
+		
+		public void setPreco(double preco){
+			this.preco=preco;
+		}
+	
+//getters das variaveis
+
+		public int getCod(){
+			return this.codigo;
+		}
+		
+		public int getCap(){
+			return this.capacidade;
+		}
+		
+		public int getProd(){
+			return this.produto;
+		}
+		
+		public double getPreco(){
+			return this.preco;
+		}
+		
+//adicionar ao repositorio variaveis
+
+		public Shelf(int codigo, int capacidade, int produto, double preco) {
 			this.codigo = codigo;
 			this.capacidade = capacidade;
 			this.produto = produto;
 			this.preco = preco;
-			shelfList.add(this);
+			ShelfRepository.getInstance().addToList(this);
 		}
+
+//Eliminar Shelfs
 		
-		public static void shelfEleFind(int idEditS){
-			
-			int id=idEditS;
-			int codigo=shelfList.get(idEditS-1).codigo;
-			int capacidade=shelfList.get(idEditS-1).capacidade;
-			int produto=shelfList.get(idEditS-1).produto;
-			double preco=shelfList.get(idEditS-1).preco;
-			TextInterface.shelfEdit(id, codigo, capacidade, produto, preco);
-			
-		};	
-	
-	
-		public static void sEdit(int id, int codigo, int capacidade, int produto, double preco){
-			
-			shelfList.get(id-1).codigo = codigo;
-			shelfList.get(id-1).capacidade = capacidade;
-			shelfList.get(id-1).produto = produto;
-			shelfList.get(id-1).preco = preco;
-			TextInterface.pratmenu();
-			
+		public static void delElemS(int id){
+			int input = Utils.getMenuInp(1, 2);
+			switch(input){
+			case 1:
+				EntityRepository.removElem(id);
+				TextInterface.pratmenu();
+				break;
+			case 2:
+				TextInterface.pratmenu();
+				break;
+			}
 		}
-		
-		public static void printShelf(){
-			System.out.println("|\tID\t|\tCodigo\t|\tCapacidade\t|\tProduto\t|\tPre�o\t|");
-			System.out.println("-----------------------------------------------------------------------------------------");
-			for(Shelf s:Shelf.shelfList){
-				System.out.println("|\t" + s.idShelf + "\t|\t" + s.codigo + "\t\t|\t" + s.capacidade + "\t|\t" + s.produto + "\t|\t" + s.preco + "\t|");
-			};
-//			
-		}
-		
-	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
+}
 		

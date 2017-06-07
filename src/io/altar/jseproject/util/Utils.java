@@ -28,8 +28,7 @@ public class Utils {
 
 			
 	//Skip com enter int	
-			public static int getSkipInt(int y){
-				Scanner dados = new Scanner(System.in);
+			public static int getSkipInt(Scanner dados, int y){
 				String x = dados.nextLine();
 				
 				if(dados.equals("") || dados.equals(" ")){
@@ -40,26 +39,24 @@ public class Utils {
 					return y;
 				};
 				
-	//Skip com enter double
-//				public static int getSkipDouble(double y){
-//					Scanner dados = new Scanner(System.in);
-//					String x = dados.nextLine();
-//					
-//					if(dados.equals("") || dados.equals(" ")){
-//						y = y;
-//					} else if (x.matches("-?\\d+(\\.\\d+)?")){
-//						y = Double.parseDouble(x);
-//					}
-	//
-//					};
-
-	//Skip com enter para delete (lista de produtos e prateleiras)	
-				public static int getSkipDel(int y){
-					Scanner dados = new Scanner(System.in);
+//	Skip com enter double
+				public static double getSkipDouble(Scanner dados, double y){
 					String x = dados.nextLine();
 					
 					if(dados.equals("") || dados.equals(" ")){
-						y = 1;
+						y = y;
+					} else if (x.matches("-?\\d+(\\.\\d+)?")){
+						y = Double.parseDouble(x);
+					}
+						return y;
+					};
+
+	//Skip com enter para delete (lista de produtos e prateleiras)	
+				public static int getSkipDel(Scanner dados, int y){
+					String x = dados.nextLine();
+					
+					if(dados.equals("") || dados.equals(" ")){
+						y = 0;
 					} else if (x.matches("\\d+")){
 						y = Integer.parseInt(x);
 					}

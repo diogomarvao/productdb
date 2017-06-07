@@ -9,6 +9,7 @@ import java.util.Set;
 import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.textinterface.TextInterface;
+import io.altar.jseproject.util.Utils;
 
 public class Product extends Entity {
 		private int idProd;
@@ -54,6 +55,7 @@ public class Product extends Entity {
 		}
 				
 //adicionar ao repositorio variaveis
+		
 		public Product(int prat, double desconto, int iva, double pvp) {
 			this.prat = prat;
 			this.desconto = desconto;
@@ -61,24 +63,21 @@ public class Product extends Entity {
 			this.pvp = pvp;
 			ProductRepository.getInstance().addToList(this);
 		}
+
+//		Eliminar produtos
 		
-		
-//Print valores da tabela do prod
-		
-	public static void valProduct(){
-		for(Interger i : entityList.keySet()){
-			
+		public static void delElemP(int id){
+			int input = Utils.getMenuInp(1, 2);
+			switch(input){
+			case 1:
+				EntityRepository.removElem(id);
+				TextInterface.prodmenu();
+				break;
+			case 2:
+				TextInterface.prodmenu();
+				break;
+			}
 		}
-				
-//				int i = 1; i<entityList.size(); i++ ){
-//			int id = i;
-//			int prat = ((Product)ProductRepository.getInstance().get(id)).getPrat();
-//			double desconto = ((Product)ProductRepository.getInstance().get(id)).getDesconto();
-//			int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
-//			double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
-//			TextInterface.printProductVal (id, prat, desconto, iva, pvp);
-//		}	
-	}
 		
 }
 		

@@ -18,8 +18,6 @@ public class ProductRepository extends EntityRepository<Product>{
 		return INSTANCE;
 	}
 	
-//Criar o produto na lista
-	
 
 //Indentificar elementos do produto a alterar (ver produtos.java)
 
@@ -44,12 +42,29 @@ public class ProductRepository extends EntityRepository<Product>{
 		
 //	substituir ou adicionar as caraterisiticas no Linked hash map (veio da TextInterface.java)	
 	
-	public static void alterElement(int id,int prat, double desconto, int iva, double pvp) {
-
+	public static void alterProdElement(int id,int prat, double desconto, int iva, double pvp) {
 		((Product)ProductRepository.getInstance().get(id)).setPrat(prat);
 		((Product)ProductRepository.getInstance().get(id)).setDesconto(desconto);
 		((Product)ProductRepository.getInstance().get(id)).setIva(iva);
 		((Product)ProductRepository.getInstance().get(id)).setPvp(pvp);
 	}
+
+//Print valores da tabela do prod
+
+	public static void valProduct(){
+		
+		for(int eq = 1; eq<=getEntityList().size(); eq++ ){
+			 int id = eq;
+			 
+			int prat = ((Product)ProductRepository.getInstance().get(eq)).getPrat();
+			double desconto = ((Product)ProductRepository.getInstance().get(eq)).getDesconto();
+			int iva = ((Product)ProductRepository.getInstance().get(eq)).getIva();
+			double pvp = ((Product)ProductRepository.getInstance().get(eq)).getPvp();
+				
+			TextInterface.printProductVal(id, prat, desconto, iva, pvp);
+			 
+			}
 	
+	}
+			
 }
