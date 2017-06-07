@@ -53,7 +53,8 @@ public class Shelf extends Entity {
 			return this.preco;
 		}
 		
-//adicionar ao repositorio variaveis
+		
+//adicionar a parteleira criada ao repositorio shelfRepository
 
 		public Shelf(int codigo, int capacidade, int produto, double preco) {
 			this.codigo = codigo;
@@ -63,12 +64,14 @@ public class Shelf extends Entity {
 			ShelfRepository.getInstance().addToList(this);
 		}
 
-//Eliminar Shelfs
+		
+///		/Eliminar Shelfs (chamado na TextInterface.java)
 		
 		public static void delElemS(int id){
 			int input = Utils.getMenuInp(1, 2);
 			switch(input){
 			case 1:
+//				O produto é morto na EntityRepository.java
 				EntityRepository.removElem(id);
 				TextInterface.pratmenu();
 				break;

@@ -97,7 +97,7 @@ import io.altar.jseproject.model.Shelf;
 			ProductRepository.getProdElem(id);
 		}
 
-//		introducao dos dados a substituir
+//		introducao dos dados a substituir (valores vêm do ProductRepository.java)
 		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira as prateleiras onde o produto estï¿½ disposto");

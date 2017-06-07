@@ -14,17 +14,20 @@ import io.altar.jseproject.util.Utils;
 public class EntityRepository<E extends Entity> {
 	private static LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
 
-//gerar ids	
-	
+//getter do entityList
+	//Para fazer print o shelfRepository e o ProductRepository n conseguem ir buscar o entityList por 
+	//ser privado, logo é necessario criar um getter para ter acesso (ver ProductRepository e 
+	//ShelfRepository)
 	public static LinkedHashMap<Integer, Entity> getEntityList() {
 		return entityList;
 	}
-
-
+	
 	public static void setEntityList(LinkedHashMap<Integer, Entity> entityList) {
 		EntityRepository.entityList = entityList;
 	}
 
+	
+//metodo para gerar o id automaticamente
 	private int id = 0;
 		
 	public int getNextId(){	
@@ -32,21 +35,20 @@ public class EntityRepository<E extends Entity> {
 	}
 
 	
-//Adicionar a lista	
-	
+//Metodo para adicionar o elemento à lista	(ver Product.java e Shelf.java)
 	public void addToList(Entity entity){
 		entity.setId(getNextId());
 		entityList.put(entity.getId(), entity);
 	}
 
-//Receber o id do elemento
 	
+//Receber o id do elemento da lista
 	public Entity get(int id){
 		return entityList.get(id);
 	}
 	
+	
 // delete do elemento
-
 	public static void removElem(int id){
 		
 			entityList.remove(id);

@@ -17,7 +17,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 	}
 
 	
-//Indentificar elementos do produto a alterar (ver shelf.java)
+//Indentificar elementos da shelf a alterar (metodo chamado na TextInterface.java)
 
 		public static void getShelfElem(int id){
 			int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
@@ -38,7 +38,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 			};	
 		
 			
-//substituir ou adicionar as caraterisiticas no Linked hash map (veio da TextInterface.java)	
+//substituir ou adicionar as caraterisiticas no Linked hash map (chamado na TextInterface.java)	
 		
 		public static void alterShelfElement(int id,int codigo, int capacidade, int produto, double preco) {
 			((Shelf)ShelfRepository.getInstance().get(id)).setCod(codigo);
@@ -48,17 +48,18 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 		}
 
 		
-//Print valores da tabela da shelf
-		
+//Print valores da tabela da shelf (chamdo na TextInterface.java)
+//																	getEntityList().size() ====> tamanho do LinkedHashMap
 		public static void valShelf(){
+			
 			for(int eq = 1; eq<=getEntityList().size(); eq++ ){
 				 int id = eq;
-				 
-				 int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
-					double capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();
-					int produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
-					double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
-					
+//			 retirar osa valores das variaveis por cada id
+				int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
+				double capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();
+				int produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
+				double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
+//																						Envia os valores para a TextInterface serem inpressos 
 				TextInterface.printProductVal(id, codigo, capacidade, produto, preco);
 				 
 				}

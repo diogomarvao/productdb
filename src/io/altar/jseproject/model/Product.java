@@ -53,8 +53,9 @@ public class Product extends Entity {
 		public double getPvp(){
 			return this.pvp;
 		}
-				
-//adicionar ao repositorio variaveis
+		
+		
+//adicionar a parteleira criada ao repositorio shelfRepository
 		
 		public Product(int prat, double desconto, int iva, double pvp) {
 			this.prat = prat;
@@ -64,12 +65,14 @@ public class Product extends Entity {
 			ProductRepository.getInstance().addToList(this);
 		}
 
-//		Eliminar produtos
+		
+//		Eliminar produtos (chamado na TextInterface.java)
 		
 		public static void delElemP(int id){
 			int input = Utils.getMenuInp(1, 2);
 			switch(input){
 			case 1:
+//				O produto é morto na EntityRepository.java
 				EntityRepository.removElem(id);
 				TextInterface.prodmenu();
 				break;
