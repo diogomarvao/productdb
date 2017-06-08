@@ -47,13 +47,13 @@ public class ProductRepository extends EntityRepository<Product>{
 		((Product)ProductRepository.getInstance().get(id)).setDesconto(desconto);
 		((Product)ProductRepository.getInstance().get(id)).setIva(iva);
 		((Product)ProductRepository.getInstance().get(id)).setPvp(pvp);
-	}
-
+	}	
+	
 //Print valores da tabela do prod (chamado na TextInterface.java)
 //																		getEntityList().size() ====> tamanho do LinkedHashMap
 	public static void valProduct(){
 		
-		for(int eq = 1; eq<=getEntityList().size(); eq++ ){
+		for(int eq = 1; eq<=ProductRepository.getEntityList().size(); eq++ ){
 			 int id = eq;
 //		 retirar os valores das variaveis por cada id		 
 			int prat = ((Product)ProductRepository.getInstance().get(eq)).getPrat();

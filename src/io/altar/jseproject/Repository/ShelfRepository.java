@@ -1,6 +1,7 @@
 package io.altar.jseproject.Repository;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
@@ -52,7 +53,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 //																	getEntityList().size() ====> tamanho do LinkedHashMap
 		public static void valShelf(){
 			
-			for(int eq = 1; eq<=getEntityList().size(); eq++ ){
+			for(int eq = 1; eq<=ShelfRepository.getEntityList().size(); eq++ ){
 				 int id = eq;
 //			 retirar osa valores das variaveis por cada id
 				int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
@@ -66,4 +67,29 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 
 		}	
 		
+//verificar existencia de prateleiras
+		
+		public static String shelfExist(){
+			int id = ShelfRepository.getEntityList().size();
+			Scanner input = new Scanner (System.in);
+		
+			if(ShelfRepository.getEntityList() == null){
+				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+				TextInterface.pratmenu();
+			}else{
+				if(((Shelf)ShelfRepository.getInstance().get(id)).getCap() < id){
+					System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
+					int idPrat = input.nextInt();
+					Product.getPrat().add(idPrat);
+				} else {
+					System.out.println("A prateleira esta cheia");
+					TextInterface.pratmenu();
+				}
+			
+			}
+		}
 }
+		
+
+		
+

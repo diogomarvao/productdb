@@ -74,7 +74,9 @@ import io.altar.jseproject.model.Shelf;
 			Scanner dados = new Scanner(System.in);
 						
 			System.out.println("Insira as parteleiras: ");
-			int prat [] = pratExp();
+			
+			
+			int prat = pratExp();
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = dados.nextInt();
 			System.out.println("Insira o valor do IVA: ");
@@ -87,7 +89,15 @@ import io.altar.jseproject.model.Shelf;
 		prodmenu();
 		
 		}
+		
+//		inserir produtos nas prateleiras
+		public static int[] pratExp(){
+			int prat[];
+				System.out.println("Insira as parteleiras que contem este produto:");
+				ShelfRepository.shelfExist();
 
+			return prat[];
+		}
 // 2) Editar um produto	
 		
 //		Introducao do id do prod a alterar	
@@ -97,7 +107,7 @@ import io.altar.jseproject.model.Shelf;
 			ProductRepository.getProdElem(id);
 		}
 
-//		introducao dos dados a substituir (valores vêm do ProductRepository.java)
+//		introducao dos dados a substituir (valores vï¿½m do ProductRepository.java)
 		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira as prateleiras onde o produto estï¿½ disposto");
@@ -222,7 +232,7 @@ import io.altar.jseproject.model.Shelf;
 			System.out.print(preco  + " -> ");
 			preco = Utils.getSkipDouble(dados, preco);
 			ShelfRepository.alterShelfElement(id, codigo, capacidade, produto, preco);
-			prodmenu();
+			pratmenu();
 		}
 		
 // 3) Consultar detalhes da prateleira

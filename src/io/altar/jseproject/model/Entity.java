@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import io.altar.jseproject.Repository.EntityRepository;
+
 public class Entity {
 	
 	private int id;
@@ -28,19 +30,19 @@ public class Entity {
 		
 		int id = 0;
 		
-//		boolean valid = false;
-//		while (!valid){
-//			while(!getIdInp.hasNextInt()){
-//				System.out.println("por favor introduza um caracter numerico");
-//				getIdInp.next();
-//			}
+		boolean valid = false;
+		while (!valid){
+			while(!getIdInp.hasNextInt()){
+				System.out.println("por favor introduza um caracter numerico");
+				getIdInp.next();
+			}
 			id	= getIdInp.nextInt();
-//		if(id<0 || id>entityList.size()){
-//				System.out.println("Insira um valor entre " + 1 + " e " + entityList.size() );
-//			}else{
-//				valid = true;
-//			}	
-//		}
+		if(id<0 || id>EntityRepository.getEntityList().size()){
+				System.out.println("Insira um valor entre " + 1 + " e " + EntityRepository.getEntityList().size() );
+			}else{
+				valid = true;
+			}	
+		}
 		return id;
 	
 	}	

@@ -3,6 +3,7 @@ package io.altar.jseproject.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -13,14 +14,14 @@ import io.altar.jseproject.util.Utils;
 
 public class Product extends Entity {
 		private int idProd;
-		private int prat;
+		private List<Integer> prat = new ArrayList<Integer>();
 		private double desconto;
 		private int iva;
 		private double pvp;		
 
 //setters das variaveis
 		
-		public void setPrat(int prat){
+		public void setPrat(List<Integer> prat){
 			this.prat=prat;
 		}
 		
@@ -38,7 +39,7 @@ public class Product extends Entity {
 		
 //getters das variaveis
 
-		public int getPrat(){
+		public static List<Integer> getPrat(){
 			return this.prat;
 		}
 		
@@ -57,7 +58,7 @@ public class Product extends Entity {
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
 		
-		public Product(int prat, double desconto, int iva, double pvp) {
+		public Product(List<Integer> prat, double desconto, int iva, double pvp) {
 			this.prat = prat;
 			this.desconto = desconto;
 			this.iva = iva;
@@ -65,6 +66,13 @@ public class Product extends Entity {
 			ProductRepository.getInstance().addToList(this);
 		}
 
+//	Adicionar produtos nas prateleiras
+		
+		public static void addProd(){
+			System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
+			getPrat().add(idProd);
+		}
+		
 		
 //		Eliminar produtos (chamado na TextInterface.java)
 		
@@ -72,7 +80,7 @@ public class Product extends Entity {
 			int input = Utils.getMenuInp(1, 2);
 			switch(input){
 			case 1:
-//				O produto é morto na EntityRepository.java
+//				O produto ï¿½ morto na EntityRepository.java
 				EntityRepository.removElem(id);
 				TextInterface.prodmenu();
 				break;
