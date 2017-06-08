@@ -50,16 +50,15 @@ public class ProductRepository extends EntityRepository<Product>{
 	}	
 	
 //Print valores da tabela do prod (chamado na TextInterface.java)
-//																		getEntityList().size() ====> tamanho do LinkedHashMap
 	public static void valProduct(){
-		
-		for(int eq = 1; eq<=ProductRepository.getEntityList().size(); eq++ ){
-			 int id = eq;
+//											keySet() -> ver EntityRepository
+		for (Integer id : getInstance().keySet()) {
 //		 retirar os valores das variaveis por cada id		 
-			int prat = ((Product)ProductRepository.getInstance().get(eq)).getPrat();
-			double desconto = ((Product)ProductRepository.getInstance().get(eq)).getDesconto();
-			int iva = ((Product)ProductRepository.getInstance().get(eq)).getIva();
-			double pvp = ((Product)ProductRepository.getInstance().get(eq)).getPvp();
+			int prat=0; 
+//			=((Product)ProductRepository.getInstance().get(id)).getPrat();
+			double desconto = ((Product)ProductRepository.getInstance().get(id)).getDesconto();
+			int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
+			double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
 //																		Envia os valores para a TextInterface serem inpressos 
 			TextInterface.printProductVal(id, prat, desconto, iva, pvp);
 			 

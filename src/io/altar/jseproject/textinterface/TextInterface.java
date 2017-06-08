@@ -76,7 +76,8 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira as parteleiras: ");
 			
 			
-			int prat = pratExp();
+			Integer [] prat;
+//			= pratExp();
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = dados.nextInt();
 			System.out.println("Insira o valor do IVA: ");

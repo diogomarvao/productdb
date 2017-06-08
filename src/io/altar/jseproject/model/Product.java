@@ -9,20 +9,23 @@ import java.util.Set;
 
 import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.Repository.ProductRepository;
+import io.altar.jseproject.Repository.ShelfRepository;
 import io.altar.jseproject.textinterface.TextInterface;
 import io.altar.jseproject.util.Utils;
 
 public class Product extends Entity {
-		private int idProd;
-		private List<Integer> prat = new ArrayList<Integer>();
+		private static ProductRepository productList = ProductRepository.getInstance();
+		private static ShelfRepository shelfList = ShelfRepository.getInstance();
+	
+		private Integer [] pratIdLoc;
 		private double desconto;
 		private int iva;
 		private double pvp;		
 
 //setters das variaveis
 		
-		public void setPrat(List<Integer> prat){
-			this.prat=prat;
+		public void setPrat(Integer [] pratIdLoc){
+			this.pratIdLoc=pratIdLoc;
 		}
 		
 		public void setDesconto(double desconto){
@@ -39,8 +42,8 @@ public class Product extends Entity {
 		
 //getters das variaveis
 
-		public static List<Integer> getPrat(){
-			return this.prat;
+		public Integer[] getPrat(){
+			return this.pratIdLoc;
 		}
 		
 		public double getDesconto(){
@@ -58,13 +61,18 @@ public class Product extends Entity {
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
 		
-		public Product(List<Integer> prat, double desconto, int iva, double pvp) {
-			this.prat = prat;
+		public Product(Integer [] pratIdLoc, double desconto, int iva, double pvp) {
+			this.pratIdLoc = pratIdLoc;
 			this.desconto = desconto;
 			this.iva = iva;
 			this.pvp = pvp;
 			ProductRepository.getInstance().addToList(this);
 		}
+
+//		@Override
+//	public String toString(){
+//		return String.format("| %d | %s | %d%% |%d%% | %.2f€ |\n", getId(), Arrays.toString(pratIdLoc), desconto, iva, pvp);
+//}
 
 //	Adicionar produtos nas prateleiras
 		

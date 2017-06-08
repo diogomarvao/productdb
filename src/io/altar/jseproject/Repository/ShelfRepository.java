@@ -50,11 +50,9 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 
 		
 //Print valores da tabela da shelf (chamdo na TextInterface.java)
-//																	getEntityList().size() ====> tamanho do LinkedHashMap
 		public static void valShelf(){
-			
-			for(int eq = 1; eq<=ShelfRepository.getEntityList().size(); eq++ ){
-				 int id = eq;
+//													keySet() -> ver EntityRepository
+				for (Integer id : getInstance().keySet()) {
 //			 retirar osa valores das variaveis por cada id
 				int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
 				double capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();

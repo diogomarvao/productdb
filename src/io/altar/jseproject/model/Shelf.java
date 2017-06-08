@@ -11,7 +11,6 @@ import io.altar.jseproject.textinterface.TextInterface;
 import io.altar.jseproject.util.Utils;
 
 public class Shelf extends Entity {
-		private int idShelf;
 		private int codigo;
 		private int capacidade;
 		private int produto;
@@ -64,6 +63,10 @@ public class Shelf extends Entity {
 			ShelfRepository.getInstance().addToList(this);
 		}
 
+		@Override
+		public String toString(){
+			return String.format("| %d | %d | %d | %d | %.2f€|\n", getId(), codigo, capacidade, produto, preco);
+	}
 		
 ///		/Eliminar Shelfs (chamado na TextInterface.java)
 		

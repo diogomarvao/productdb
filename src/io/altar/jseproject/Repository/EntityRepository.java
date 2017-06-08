@@ -33,21 +33,34 @@ public class EntityRepository<E extends Entity> {
 	public int getNextId(){	
 		return ++id;
 	}
-
 	
+	
+//Indentificar Ids
+	//Receber todos os Ids da lista   (vai servir principalmente para inndentificar a 
+//										quantidade de shelfs e products no entityList)
+		public Set<Integer> keySet(){
+			return entityList.keySet();
+	}
+	
+	//Verificar se a lista esta vazia	(utilizado para verificar a existencia de produtos
+//											ou parteleiras durante a criaçao dos mesmos)
+		public boolean isEmpty(){
+			return entityList.isEmpty();
+	}
+		
+	//Receber o id do elemento da lista
+		public Entity get(int id){
+			return entityList.get(id);
+		}
+
+		
 //Metodo para adicionar o elemento à lista	(ver Product.java e Shelf.java)
 	public void addToList(Entity entity){
 		entity.setId(getNextId());
 		entityList.put(entity.getId(), entity);
 	}
-
 	
-//Receber o id do elemento da lista
-	public Entity get(int id){
-		return entityList.get(id);
-	}
-	
-	
+		
 // delete do elemento
 	public static void removElem(int id){
 		
