@@ -25,8 +25,9 @@ public class Utils {
 				}
 				return menuinp;
 			}
-
+	
 			
+				
 	//Skip com enter int	
 			public static int getSkipInt(Scanner dados, int y){
 				String x = dados.nextLine();
@@ -38,6 +39,7 @@ public class Utils {
 				}
 					return y;
 				};
+				
 				
 //	Skip com enter double
 				public static double getSkipDouble(Scanner dados, double y){

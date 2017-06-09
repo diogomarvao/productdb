@@ -69,16 +69,16 @@ public class Product extends Entity {
 			ProductRepository.getInstance().addToList(this);
 		}
 
-//		@Override
-//	public String toString(){
-//		return String.format("| %d | %s | %d%% |%d%% | %.2f€ |\n", getId(), Arrays.toString(pratIdLoc), desconto, iva, pvp);
-//}
 
 //	Adicionar produtos nas prateleiras
 		
-		public static void addProd(){
-			System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
-			getPrat().add(idProd);
+		public static void addToPrat(){
+			if(!shelfList.isEmpty()){
+				System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
+			} else {
+				System.out.println("A lista de prateleiras estÃ¡ vazia");
+			}
+			
 		}
 		
 		

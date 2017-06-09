@@ -63,10 +63,6 @@ public class Shelf extends Entity {
 			ShelfRepository.getInstance().addToList(this);
 		}
 
-		@Override
-		public String toString(){
-			return String.format("| %d | %d | %d | %d | %.2f€|\n", getId(), codigo, capacidade, produto, preco);
-	}
 		
 ///		/Eliminar Shelfs (chamado na TextInterface.java)
 		
@@ -74,7 +70,7 @@ public class Shelf extends Entity {
 			int input = Utils.getMenuInp(1, 2);
 			switch(input){
 			case 1:
-//				O produto é morto na EntityRepository.java
+//				O produto ï¿½ morto na EntityRepository.java
 				EntityRepository.removElem(id);
 				TextInterface.pratmenu();
 				break;

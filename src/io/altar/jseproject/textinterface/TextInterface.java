@@ -11,7 +11,9 @@ import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
 	
 	public class TextInterface{
-
+		private static ProductRepository productList = ProductRepository.getInstance();
+		private static ShelfRepository shelfList = ShelfRepository.getInstance();
+		
 //Menu inicial
 		public static void menuinicial(){
 			
@@ -38,8 +40,12 @@ import io.altar.jseproject.model.Shelf;
 	
 // 0 Menu produtos
 		public static void prodmenu(){	
-			System.out.println("Tem os seguintes produtos em stock:");
-			printProduct();
+			if(productList.isEmpty()){
+				System.out.println("A lista de produtos está vazia");
+			} else {
+				System.out.println("Tem os seguintes produtos em stock:");
+				printProduct();
+			}
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
 			System.out.println("	1) Criar novo produto");
@@ -74,18 +80,42 @@ import io.altar.jseproject.model.Shelf;
 			Scanner dados = new Scanner(System.in);
 						
 			System.out.println("Insira as parteleiras: ");
+			if(!shelfList.isEmpty()){
+				System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
+				
+			} else {
+				System.out.println("A lista de prateleiras está vazia");
+			}
 			
-			
+			Product.addToPrat();
 			Integer [] prat;
+			
 //			= pratExp();
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = dados.nextInt();
-			System.out.println("Insira o valor do IVA: ");
-			int iva = dados.nextInt();
+
+			System.out.println("\n | Indique o valor do IVA |");
+			System.out.println("	1) 6%");
+			System.out.println("	2) 13%");
+			System.out.println("	3) 23%");
+		
+			int menuinp = Utils.getMenuInp(1,3);
+			int iva=0;
+				switch(menuinp){
+					case 1:
+						iva = 6; 
+						break;
+					case 2:
+						iva = 13;
+						break;
+					case 3:
+						iva = 23;
+						break;
+				}
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
-			Product p = new Product(prat, desconto, iva, pvp);
+//			Product p = new Product(prat, desconto, iva, pvp);
 			
 		prodmenu();
 		
@@ -157,9 +187,13 @@ import io.altar.jseproject.model.Shelf;
 		}		
 				
 // 0 Menu das prateleiras
-		public static void pratmenu(){		
-			System.out.println("As prateleiras disponiveis s�o as seguintes:");
-			printShelf();
+		public static void pratmenu(){
+			if(!shelfList.isEmpty()){
+				System.out.println("As prateleiras disponiveis s�o as seguintes:");
+				printShelf();
+			} else {
+				System.out.println("A lista de prateleiras está vazia");
+			}
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
 			System.out.println("	1) Criar nova prateleira");
@@ -178,7 +212,7 @@ import io.altar.jseproject.model.Shelf;
 						pratFind();
 						break;
 					case 3:
-						
+						pratFind();
 						break;
 					case 4:
 						delShelf();
