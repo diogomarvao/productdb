@@ -65,27 +65,6 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 
 		}	
 		
-//verificar existencia de prateleiras
-		
-		public static String shelfExist(){
-			int id = ShelfRepository.getEntityList().size();
-			Scanner input = new Scanner (System.in);
-		
-			if(ShelfRepository.getEntityList() == null){
-				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
-				TextInterface.pratmenu();
-			}else{
-				if(((Shelf)ShelfRepository.getInstance().get(id)).getCap() < id){
-					System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
-					int idPrat = input.nextInt();
-					Product.getPrat().add(idPrat);
-				} else {
-					System.out.println("A prateleira esta cheia");
-					TextInterface.pratmenu();
-				}
-			
-			}
-		}
 }
 		
 

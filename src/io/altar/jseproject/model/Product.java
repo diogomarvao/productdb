@@ -17,7 +17,7 @@ public class Product extends Entity {
 		private static ProductRepository productList = ProductRepository.getInstance();
 		private static ShelfRepository shelfList = ShelfRepository.getInstance();
 	
-		private Integer [] pratIdLoc;
+		private static Integer [] pratIdLoc;
 		private double desconto;
 		private int iva;
 		private double pvp;		
@@ -41,11 +41,15 @@ public class Product extends Entity {
 		}
 		
 //getters das variaveis
+		
+		public static Integer [] getPratIdLoc(){
+			return pratIdLoc;
+		}
 
 		public Integer[] getPrat(){
 			return this.pratIdLoc;
 		}
-		
+
 		public double getDesconto(){
 			return this.desconto;
 		}
@@ -72,12 +76,9 @@ public class Product extends Entity {
 
 //	Adicionar produtos nas prateleiras
 		
-		public static void addToPrat(){
-			if(!shelfList.isEmpty()){
-				System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
-			} else {
-				System.out.println("A lista de prateleiras está vazia");
-			}
+		public static int addToPrat(Integer Id){
+				pratIdLoc.add(Id);
+			return Id;
 			
 		}
 		

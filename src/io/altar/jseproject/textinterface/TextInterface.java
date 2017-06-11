@@ -1,5 +1,6 @@
 package io.altar.jseproject.textinterface;
 	import java.util.Scanner;
+import java.util.Set;
 
 import io.altar.jseproject.util.Utils;
 import io.altar.jseproject.Repository.EntityRepository;
@@ -78,27 +79,35 @@ import io.altar.jseproject.model.Shelf;
 // 1) Criar novo produto
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
-						
-			System.out.println("Insira as parteleiras: ");
-			if(!shelfList.isEmpty()){
-				System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
-				
-			} else {
-				System.out.println("A lista de prateleiras está vazia");
+			
+//		1.1 inserir produtos nas prateleiras	
+			if(ShelfRepository.getEntityList() == null){
+				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+			}else{			
+				if(ShelfRepository.getInstance().keySet() < ShelfRepository.getInstance().getCap()){
+					System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
+					Integer idPrat = dados.nextInt();
+					
+					Product.addToPrat(idPrat);
+					
+				} else {
+					System.out.println("A prateleira esta cheia");
+				}
+			
 			}
 			
-			Product.addToPrat();
-			Integer [] prat;
 			
-//			= pratExp();
+//		1.2 inserir o valor do desconto
 			System.out.println("Insira o valor do desconto: ");
-			double desconto = dados.nextInt();
-
+			double desconto = Utils.getMenuInp(0, 99999.99);
+			
+//		1.3 iserir o valor do IVa
 			System.out.println("\n | Indique o valor do IVA |");
 			System.out.println("	1) 6%");
 			System.out.println("	2) 13%");
 			System.out.println("	3) 23%");
-		
+			
+//		1.4 Switch Menu
 			int menuinp = Utils.getMenuInp(1,3);
 			int iva=0;
 				switch(menuinp){
@@ -115,20 +124,11 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
-//			Product p = new Product(prat, desconto, iva, pvp);
-			
 		prodmenu();
 		
 		}
 		
-//		inserir produtos nas prateleiras
-		public static int[] pratExp(){
-			int prat[];
-				System.out.println("Insira as parteleiras que contem este produto:");
-				ShelfRepository.shelfExist();
 
-			return prat[];
-		}
 // 2) Editar um produto	
 		
 //		Introducao do id do prod a alterar	
