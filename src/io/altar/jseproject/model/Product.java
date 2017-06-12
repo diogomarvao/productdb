@@ -62,9 +62,18 @@ public class Product extends Entity {
 			return this.pvp;
 		}
 		
+
+//	Adicionar produtos nas prateleiras
+		
+		public static int addToPrat(Integer Id){
+//			n faz sentido
+				pratIdLoc[Id] = Id; 
+			return Id;
+			
+		}
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
-		
+
 		public Product(Integer [] pratIdLoc, double desconto, int iva, double pvp) {
 			this.pratIdLoc = pratIdLoc;
 			this.desconto = desconto;
@@ -73,15 +82,6 @@ public class Product extends Entity {
 			ProductRepository.getInstance().addToList(this);
 		}
 
-
-//	Adicionar produtos nas prateleiras
-		
-		public static int addToPrat(Integer Id){
-				pratIdLoc.add(Id);
-			return Id;
-			
-		}
-		
 		
 //		Eliminar produtos (chamado na TextInterface.java)
 		

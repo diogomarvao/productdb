@@ -83,10 +83,12 @@ import io.altar.jseproject.model.Shelf;
 //		1.1 inserir produtos nas prateleiras	
 			if(ShelfRepository.getEntityList() == null){
 				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
-			}else{			
-				if(ShelfRepository.getInstance().keySet() < ShelfRepository.getInstance().getCap()){
-					System.out.println("Insira o ID da prateleira que pretende inserir o produto:");
-					Integer idPrat = dados.nextInt();
+			}else{	
+				System.out.println("Indique a prateleira que pretende inserir o produto: ");
+				Integer idPrat = dados.nextInt();
+					
+				if((Shelf)ShelfRepository.getInstance().get(idPrat).getProd().length < ((Shelf)ShelfRepository.getInstance().get(idPrat)).getCap()){
+					
 					
 					Product.addToPrat(idPrat);
 					

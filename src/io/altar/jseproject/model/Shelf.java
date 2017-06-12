@@ -13,7 +13,7 @@ import io.altar.jseproject.util.Utils;
 public class Shelf extends Entity {
 		private int codigo;
 		private int capacidade;
-		private int produto;
+		private Integer [] produto;
 		private double preco;
 	
 //setters das variaveis	
@@ -26,7 +26,7 @@ public class Shelf extends Entity {
 			this.capacidade=capacidade;
 		}
 		
-		public void setProd(int produto){
+		public void setProd(Integer [] produto){
 			this.produto=produto;
 		}
 		
@@ -44,7 +44,7 @@ public class Shelf extends Entity {
 			return this.capacidade;
 		}
 		
-		public int getProd(){
+		public Integer [] getProd(){
 			return this.produto;
 		}
 		
@@ -55,7 +55,7 @@ public class Shelf extends Entity {
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
 
-		public Shelf(int codigo, int capacidade, int produto, double preco) {
+		public Shelf(int codigo, int capacidade, Integer [] produto, double preco) {
 			this.codigo = codigo;
 			this.capacidade = capacidade;
 			this.produto = produto;
