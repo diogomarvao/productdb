@@ -79,26 +79,28 @@ import io.altar.jseproject.model.Shelf;
 // 1) Criar novo produto
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
+			Integer[] pratIdLoc= new Integer[0];
+//			
+////		1.1 inserir produtos nas prateleiras	
+//			if(ShelfRepository.getInstance() == null){
+//				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+//			}else{	
+//				System.out.println("Indique a prateleira que pretende inserir o produto: ");
+//				Integer idPrat = dados.nextInt();
+//					
+////				As prateleiras estao vazias?
+////				- Sim
+//				if(shelfList.get(idPrat).getProd().length < shelfList.get(idPrat).getCap()){
+////PEDIR OPINIAO AQUI!!!!
+//					Product.addToPrat(dados, idPrat);
+//					
+////				- Nao
+//				} else {
+//					System.out.println("A prateleira esta cheia");
+//				}
+//			}
 			
-//		1.1 inserir produtos nas prateleiras	
-			if(ShelfRepository.getEntityList() == null){
-				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
-			}else{	
-				System.out.println("Indique a prateleira que pretende inserir o produto: ");
-				Integer idPrat = dados.nextInt();
-					
-				if((Shelf)ShelfRepository.getInstance().get(idPrat).getProd().length < ((Shelf)ShelfRepository.getInstance().get(idPrat)).getCap()){
-					
-					
-					Product.addToPrat(idPrat);
-					
-				} else {
-					System.out.println("A prateleira esta cheia");
-				}
-			
-			}
-			
-			
+
 //		1.2 inserir o valor do desconto
 			System.out.println("Insira o valor do desconto: ");
 			double desconto = Utils.getMenuInp(0, 99999.99);
@@ -126,6 +128,8 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
+			Product p = new Product(pratIdLoc, desconto, iva, pvp);
+			
 		prodmenu();
 		
 		}
@@ -133,28 +137,67 @@ import io.altar.jseproject.model.Shelf;
 
 // 2) Editar um produto	
 		
-//		Introducao do id do prod a alterar	
+//	2.1 Introducao do id do prod a alterar	
 		public static void prodFind(){
 			System.out.println("Insira o ID do produto que pretende editar");
 			int id = Entity.inputId();
 			ProductRepository.getProdElem(id);
 		}
 
-//		introducao dos dados a substituir (valores v�m do ProductRepository.java)
-		public static void prodEdit(int idProd, int prat, double desconto, int iva, double pvp){
+//	2.2 introducao dos dados a substituir (valores v�m do ProductRepository.java)
+		public static void prodEdit(int idProd, Integer [] prat, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
+			
+//		2.2.1 Editar prateleiras
 			System.out.println("Insira as prateleiras onde o produto est� disposto");
-			System.out.print(prat + " -> ");
-			prat=Utils.getSkipDel(dados, prat);
+			
+			if(ShelfRepository.getInstance() != null){
+				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+				
+			}else{	
+				System.out.print(prat + " -> ");
+				Product.editProdPrat(dados, idProd);
+				
+			}
+			
+//		2.2.2 Desconto
 			System.out.println("Insira o valor do desconto: ");
 			System.out.print(desconto + " -> ");
 			desconto = Utils.getSkipDouble(dados, desconto);
+			
+//		2.2.3 IVA
 			System.out.println("Insira o valor do IVA: ");
-			System.out.print(iva  + " -> ");
-			iva = Utils.getSkipInt(dados, iva);
+			
+			System.out.println("\n | Indique o valor do IVA |");
+			System.out.println("| Valor de IVA Actual: " + iva + " |");
+			System.out.println("	1) 6%");
+			System.out.println("	2) 13%");
+			System.out.println("	3) 23%");
+			System.out.println("	4) Manter IVA");
+			
+//			Switch Menu
+			int menuinp = Utils.getMenuInp(1,4);
+		
+				switch(menuinp){
+					case 1:
+						iva = 6; 
+						break;
+					case 2:
+						iva = 13;
+						break;
+					case 3:
+						iva = 23;
+						break;
+					case 4:
+						break;
+				}
+		
+//		2.2.4 PVP
 			System.out.println("Insira o PVP: ");
 			System.out.print(pvp  + " -> ");
 			pvp = Utils.getSkipDouble(dados, pvp);
+			
+//		2.2.5 Altera dados
 			ProductRepository.alterProdElement(idProd, prat, desconto, iva, pvp);
 			prodmenu();
 		}
@@ -191,10 +234,12 @@ import io.altar.jseproject.model.Shelf;
 // 0 Menu das prateleiras
 		public static void pratmenu(){
 			if(!shelfList.isEmpty()){
+				System.out.println("A lista de prateleiras está vazia");
+				
+			} else {
 				System.out.println("As prateleiras disponiveis s�o as seguintes:");
 				printShelf();
-			} else {
-				System.out.println("A lista de prateleiras está vazia");
+				
 			}
 			
 			System.out.println("\n | Por favor selecione uma das seguintes opcoes: |");
@@ -234,7 +279,8 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("Insira a capacidade da parteleira: ");
 			int capacidade = dados.nextInt();
 			System.out.println("Insira o ID do produto: ");
-			int produto = dados.nextInt();
+//Placeholder
+			Integer [] produto=new Integer[0];
 			System.out.println("Insira o precode aluguer diario de localizacao: ");
 			double preco = dados.nextInt();
 			
@@ -254,7 +300,7 @@ import io.altar.jseproject.model.Shelf;
 		}
 		
 //		introducao dos dados a substituir
-		public static void shelfEdit(int id, int codigo, int capacidade, int produto, double preco){
+		public static void shelfEdit(int id, int codigo, int capacidade, Integer [] produto, double preco){
 			Scanner dados = new Scanner(System.in);
 			System.out.println("Insira a localizacao da parteleira: ");
 			System.out.print(codigo + " -> ");
@@ -264,7 +310,7 @@ import io.altar.jseproject.model.Shelf;
 			capacidade = Utils.getSkipInt(dados, capacidade);
 			System.out.println("Insira o ID do produto: ");
 			System.out.print(produto  + " -> ");
-			produto = Utils.getSkipDel(dados, produto);
+//			produto = Utils.getSkipDel(dados, produto);
 			System.out.println("Insira o precode aluguer diario de localizacao: ");
 			System.out.print(preco  + " -> ");
 			preco = Utils.getSkipDouble(dados, preco);
@@ -282,7 +328,7 @@ import io.altar.jseproject.model.Shelf;
 		}
 		
 		//print dos detalhes da prateleira
-		public static void printShelfDetails(int id, int codigo, int capacidade, int produto, double preco){
+		public static void printShelfDetails(int id, int codigo, int capacidade, Integer [] produto, double preco){
 			System.out.println("|\tID\t|\tLocalizacao\t|\tCapacidade\t|\tProdutos\t|\tAluguer diario\t|");
 			System.out.println("---------------------------------------------------------------------------------------");
 			System.out.println("|\t" + id + "\t|\t" + codigo + "\t\t|\t" + capacidade + "\t|\t" + produto + "\t|\t" + preco + "\t|");
@@ -328,7 +374,7 @@ import io.altar.jseproject.model.Shelf;
 			}
 		
 //			Print dos valores
-			public static void printShelfVal(int id, int codigo, int capacidade, int produto, double preco){
+			public static void printShelfVal(int id, int codigo, int capacidade, Integer [] produto, double preco){
 				System.out.println("|\t" + id + "\t|\t" + codigo + "\t\t|\t" + capacidade + "\t|\t" + produto + "\t|\t" + preco + "\t|");
 			}
 		

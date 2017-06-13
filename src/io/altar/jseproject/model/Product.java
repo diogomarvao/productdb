@@ -65,13 +65,45 @@ public class Product extends Entity {
 
 //	Adicionar produtos nas prateleiras
 		
-		public static int addToPrat(Integer Id){
-//			n faz sentido
-				pratIdLoc[Id] = Id; 
-			return Id;
+		public static Integer[] addToPrat(Scanner dados, int id){
+			int i=0;
+//			pedir opiniao
+			while(pratIdLoc[i] == id){
+				
+				for(i=0; i<pratIdLoc.length; i++){
+					if(pratIdLoc[i] == id){
+						System.out.println("Indique outra prateleira");
+						id = dados.nextInt();
+					}		
+				}
+				
+			}
+				pratIdLoc[pratIdLoc.length+1] = id; 
+				produto[produto.length+1] = getId();
+				return pratIdLoc;
 			
 		}
 		
+//	Editar o produto na prateleira	
+		public static int editProdPrat(Scanner dados, int id){
+			int i=0;
+//			pedir opiniao
+			while(pratIdLoc[i] != id){
+				
+				for(i=0; i<pratIdLoc.length; i++){
+					if(pratIdLoc[i] == id){
+						id = Utils.getSkipDel(dados, id);
+						break;
+					}		
+				}
+				
+			}
+			int idProd = id;
+			return idProd;
+			
+		}
+
+
 //adicionar a parteleira criada ao repositorio shelfRepository
 
 		public Product(Integer [] pratIdLoc, double desconto, int iva, double pvp) {
