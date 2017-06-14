@@ -1,6 +1,7 @@
 package io.altar.jseproject.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,18 +13,18 @@ import io.altar.jseproject.textinterface.TextInterface;
 import io.altar.jseproject.util.Utils;
 
 public class EntityRepository<E extends Entity> {
-	private static LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
+	private LinkedHashMap <Integer, Entity> entityList = new LinkedHashMap<>();
 
 //getter do entityList
 	//Para fazer print o shelfRepository e o ProductRepository n conseguem ir buscar o entityList por 
-	//ser privado, logo é necessario criar um getter para ter acesso (ver ProductRepository e 
+	//ser privado, logo ï¿½ necessario criar um getter para ter acesso (ver ProductRepository e 
 	//ShelfRepository)
-	public static LinkedHashMap<Integer, Entity> getEntityList() {
+	public LinkedHashMap<Integer, Entity> getEntityList() {
 		return entityList;
 	}
 	
-	public static void setEntityList(LinkedHashMap<Integer, Entity> entityList) {
-		EntityRepository.entityList = entityList;
+	public void setEntityList(LinkedHashMap<Integer, Entity> entityList) {
+		this.entityList = entityList;
 	}
 
 	
@@ -43,7 +44,7 @@ public class EntityRepository<E extends Entity> {
 	}
 	
 	//Verificar se a lista esta vazia	(utilizado para verificar a existencia de produtos
-//											ou parteleiras durante a criaçao dos mesmos)
+//											ou parteleiras durante a criaï¿½ao dos mesmos)
 		public boolean isEmpty(){
 			return entityList.isEmpty();
 	}
@@ -52,17 +53,22 @@ public class EntityRepository<E extends Entity> {
 		public Entity get(int id){
 			return entityList.get(id);
 		}
+		
+//		public Collection<Entity> teste(){
+//			return entityList.values();
+//		}
 
 		
-//Metodo para adicionar o elemento à lista	(ver Product.java e Shelf.java)
+//Metodo para adicionar o elemento ï¿½ lista	(ver Product.java e Shelf.java)
 	public void addToList(Entity entity){
 		entity.setId(getNextId());
 		entityList.put(entity.getId(), entity);
+		System.out.println(entityList.size());
 	}
 	
 		
 // delete do elemento
-	public static void removElem(int id){
+	public void removElem(int id){
 		
 			entityList.remove(id);
 					

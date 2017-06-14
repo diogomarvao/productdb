@@ -23,29 +23,7 @@ public class Entity {
 		this.id=id;
 		
 	}
-	
-//inputs de id
-	public static int inputId(){
-		Scanner getIdInp = new Scanner(System.in);
 		
-		int id = 0;
-		
-		boolean valid = false;
-		while (!valid){
-			while(!getIdInp.hasNextInt()){
-				System.out.println("por favor introduza um caracter numerico");
-				getIdInp.next();
-			}
-			id	= getIdInp.nextInt();
-		if(id<0 || id>EntityRepository.getEntityList().size()){
-				System.out.println("Insira um valor entre " + 1 + " e " + EntityRepository.getEntityList().size() );
-			}else{
-				valid = true;
-			}	
-		}
-		return id;
-	
-	}	
 	
 }
 

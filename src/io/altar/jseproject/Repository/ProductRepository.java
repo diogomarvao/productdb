@@ -22,11 +22,11 @@ public class ProductRepository extends EntityRepository<Product>{
 //Indentificar elementos do produto a alterar (metodo chamado na TextInterface.java)
 
 	public static void getProdElem(int id){
-		Integer [] prat = ((Product)ProductRepository.getInstance().get(id)).getPrat();
+		ArrayList<Integer> pratIdLoc = ((Product)ProductRepository.getInstance().get(id)).getPratIdLoc();
 		double desconto = ((Product)ProductRepository.getInstance().get(id)).getDesconto();
 		int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
 		double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
-		TextInterface.prodEdit(id, prat, desconto, iva, pvp);
+		TextInterface.prodEdit(id, pratIdLoc, desconto, iva, pvp);
 		};	
 	
 //Indentificar elementos do produto para ver detalhes (ver produtos.java para vars, metodo chamado na textInterface.java)
@@ -43,8 +43,8 @@ public class ProductRepository extends EntityRepository<Product>{
 		
 //	substituir ou adicionar as caraterisiticas no Linked hash map (chamado na TextInterface.java)	
 	
-	public static void alterProdElement(int id,Integer [] prat, double desconto, int iva, double pvp) {
-		((Product)ProductRepository.getInstance().get(id)).setPrat(prat);
+	public static void alterProdElement(int id,ArrayList<Integer> pratIdLoc, double desconto, int iva, double pvp) {
+		((Product)ProductRepository.getInstance().get(id)).setPratIdLoc(pratIdLoc);
 		((Product)ProductRepository.getInstance().get(id)).setDesconto(desconto);
 		((Product)ProductRepository.getInstance().get(id)).setIva(iva);
 		((Product)ProductRepository.getInstance().get(id)).setPvp(pvp);
@@ -55,11 +55,15 @@ public class ProductRepository extends EntityRepository<Product>{
 //											keySet() -> ver EntityRepository
 		for (Integer id : getInstance().keySet()) {
 //		 retirar os valores das variaveis por cada id		 
-			int prat=0; 
+			int prat=0;
+			
+//			System.out.println(ProductRepository.getInstance().teste());
+			
 //			=((Product)ProductRepository.getInstance().get(id)).getPrat();
-			double desconto = ((Product)ProductRepository.getInstance().get(id)).getDesconto();
-			int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
-			double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
+			Product p = (Product)ProductRepository.getInstance().get(id);
+			double desconto = p.getDesconto();
+			int iva = p.getIva();
+			double pvp = p.getPvp();
 //																		Envia os valores para a TextInterface serem inpressos 
 			TextInterface.printProductVal(id, prat, desconto, iva, pvp);
 			 

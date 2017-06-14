@@ -1,15 +1,13 @@
 package io.altar.jseproject.textinterface;
-	import java.util.Scanner;
-import java.util.Set;
+	import java.util.ArrayList;
+import java.util.Scanner;
 
-import io.altar.jseproject.util.Utils;
-import io.altar.jseproject.Repository.EntityRepository;
 import io.altar.jseproject.Repository.ProductRepository;
 import io.altar.jseproject.Repository.ShelfRepository;
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
-import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
+import io.altar.jseproject.util.Utils;
 	
 	public class TextInterface{
 		private static ProductRepository productList = ProductRepository.getInstance();
@@ -79,27 +77,40 @@ import io.altar.jseproject.model.Shelf;
 // 1) Criar novo produto
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
-			Integer[] pratIdLoc= new Integer[0];
-//			
-////		1.1 inserir produtos nas prateleiras	
-//			if(ShelfRepository.getInstance() == null){
-//				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
-//			}else{	
-//				System.out.println("Indique a prateleira que pretende inserir o produto: ");
-//				Integer idPrat = dados.nextInt();
-//					
-////				As prateleiras estao vazias?
-////				- Sim
-//				if(shelfList.get(idPrat).getProd().length < shelfList.get(idPrat).getCap()){
-////PEDIR OPINIAO AQUI!!!!
-//					Product.addToPrat(dados, idPrat);
-//					
-////				- Nao
-//				} else {
-//					System.out.println("A prateleira esta cheia");
-//				}
-//			}
+			ArrayList<Integer> pratIdLoc= new ArrayList<>();
+			Integer idPrat=0;
 			
+//		1.1 inserir produtos nas prateleiras	
+			
+			System.out.println("Deseja inserir o produto criado em alguma prateleira?\n 1-> Sim \n 2-> Nao");
+			int menuinp = Utils.getMenuInp(1, 2);
+			
+			switch(menuinp){
+				case 1: 
+
+					if(ShelfRepository.getInstance() == null){
+						System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+					}else{	
+						System.out.println("Indique a prateleira que pretende inserir o produto: ");
+						Product.addToPrat(dados, idPrat);
+							
+//				As prateleiras estao vazias?
+//						- Sim
+//						if(getPratIdLoc().size() < shelfList.get(idPrat).getCap()){
+////PEDIR OPINIAO AQUI!!!!
+//							Product.addToPrat(dados, idPrat);
+//							
+////				-		 Nao
+//						} else {
+//							System.out.println("A prateleira esta cheia");
+//						}
+					}
+			
+				break;
+			
+				case 2:
+					break;
+			}
 
 //		1.2 inserir o valor do desconto
 			System.out.println("Insira o valor do desconto: ");
@@ -111,8 +122,8 @@ import io.altar.jseproject.model.Shelf;
 			System.out.println("	2) 13%");
 			System.out.println("	3) 23%");
 			
-//		1.4 Switch Menu
-			int menuinp = Utils.getMenuInp(1,3);
+//			Switch Menu
+			menuinp = Utils.getMenuInp(1,3);
 			int iva=0;
 				switch(menuinp){
 					case 1:
@@ -125,6 +136,8 @@ import io.altar.jseproject.model.Shelf;
 						iva = 23;
 						break;
 				}
+				
+//		1.4 inserir pvp
 			System.out.println("Insira o PVP: ");
 			double pvp = dados.nextInt();
 			
@@ -140,22 +153,22 @@ import io.altar.jseproject.model.Shelf;
 //	2.1 Introducao do id do prod a alterar	
 		public static void prodFind(){
 			System.out.println("Insira o ID do produto que pretende editar");
-			int id = Entity.inputId();
+			int id = Product.inputIdProd();
 			ProductRepository.getProdElem(id);
 		}
 
 //	2.2 introducao dos dados a substituir (valores v�m do ProductRepository.java)
-		public static void prodEdit(int idProd, Integer [] prat, double desconto, int iva, double pvp){
+		public static void prodEdit(int idProd, ArrayList<Integer> pratIdLoc, double desconto, int iva, double pvp){
 			Scanner dados = new Scanner(System.in);
 			
 //		2.2.1 Editar prateleiras
 			System.out.println("Insira as prateleiras onde o produto est� disposto");
 			
-			if(ShelfRepository.getInstance() != null){
+			if(ShelfRepository.getInstance() == null){
 				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
 				
 			}else{	
-				System.out.print(prat + " -> ");
+				System.out.print(pratIdLoc + " -> ");
 				Product.editProdPrat(dados, idProd);
 				
 			}
@@ -198,7 +211,7 @@ import io.altar.jseproject.model.Shelf;
 			pvp = Utils.getSkipDouble(dados, pvp);
 			
 //		2.2.5 Altera dados
-			ProductRepository.alterProdElement(idProd, prat, desconto, iva, pvp);
+			ProductRepository.alterProdElement(idProd, pratIdLoc, desconto, iva, pvp);
 			prodmenu();
 		}
 		
@@ -208,7 +221,7 @@ import io.altar.jseproject.model.Shelf;
 //		Introducao do id do produto a pesquisar
 		public static void prodChars(){
 			System.out.println("Introduza o valor do ID do producto que pretende consultar ");
-			int id = Entity.inputId();
+			int id = Product.inputIdProd();
 			ProductRepository.getProdDet(id);
 		}
 		
@@ -226,14 +239,14 @@ import io.altar.jseproject.model.Shelf;
 //		Introducao do id do produto a eliminar
 		public static void delProd(){
 			System.out.println("Insira o Id do produto que pretende eliminar");
-			int id = Entity.inputId();
+			int id = Product.inputIdProd();
 			System.out.println("Tem a certeza que prentende eliminar este produto da DB?/n 1 -> Eliminar/n 2 -> Cancelar");
 			Product.delElemP(id);
 		}		
 				
 // 0 Menu das prateleiras
 		public static void pratmenu(){
-			if(!shelfList.isEmpty()){
+			if(shelfList.isEmpty()){
 				System.out.println("A lista de prateleiras está vazia");
 				
 			} else {
@@ -259,7 +272,7 @@ import io.altar.jseproject.model.Shelf;
 						pratFind();
 						break;
 					case 3:
-						pratFind();
+						shelfChars();
 						break;
 					case 4:
 						delShelf();
@@ -274,17 +287,28 @@ import io.altar.jseproject.model.Shelf;
 		public static void newShelf(){
 			Scanner dados = new Scanner(System.in);
 			
+//		1.1 localizacao
 			System.out.println("Insira a localizacao da parteleira: ");
 			int codigo = dados.nextInt();
+			
+//		1.2 Capacidade da prateleira
 			System.out.println("Insira a capacidade da parteleira: ");
 			int capacidade = dados.nextInt();
+			
+//		1.3 Inserir produtos na shelf
 			System.out.println("Insira o ID do produto: ");
-//Placeholder
-			Integer [] produto=new Integer[0];
-			System.out.println("Insira o precode aluguer diario de localizacao: ");
+			
+//			placeholder
+			Integer produto= 0;
+//							
+		
+			
+//		1.4 preco de aluguer
+			System.out.println("Insira o preco de aluguer diario de localizacao: ");
 			double preco = dados.nextInt();
 			
-			Shelf s = new Shelf(codigo, capacidade, produto, preco);
+//		1.5 Adicionar a shelf
+			new Shelf(codigo, capacidade, produto, preco);
 
 			pratmenu();
 			
@@ -292,28 +316,38 @@ import io.altar.jseproject.model.Shelf;
 
 // 2) Editar uma prat	
 		
-//		Introducao do id da prat a alterar
+//	2.1 Introducao do id da prat a alterar
 		public static void pratFind(){
 			System.out.println("Insira o ID da prateleira que pretende editar");
-			int id = Entity.inputId();
+			int id = Shelf.inputIdShelf();
 			ShelfRepository.getShelfElem(id);
 		}
 		
-//		introducao dos dados a substituir
-		public static void shelfEdit(int id, int codigo, int capacidade, Integer [] produto, double preco){
+//	2.2 introducao dos dados a substituir
+		public static void shelfEdit(int id, int codigo, int capacidade, Integer produto, double preco){
 			Scanner dados = new Scanner(System.in);
+			
+//	  2.2.1 Localizacao das prateleiras
 			System.out.println("Insira a localizacao da parteleira: ");
 			System.out.print(codigo + " -> ");
 			codigo = Utils.getSkipInt(dados, codigo);
+			
+//	  2.2.2 Capacidade das prateleiras
 			System.out.println("Insira a capacidade da parteleira: ");
 			System.out.print(capacidade  + " -> ");
 			capacidade = Utils.getSkipInt(dados, capacidade);
+			
+//	  2.2.3 Produtos nas prateleiras
 			System.out.println("Insira o ID do produto: ");
 			System.out.print(produto  + " -> ");
 //			produto = Utils.getSkipDel(dados, produto);
+			
+//	  2.2.4 Preco diario
 			System.out.println("Insira o precode aluguer diario de localizacao: ");
 			System.out.print(preco  + " -> ");
 			preco = Utils.getSkipDouble(dados, preco);
+			
+//	  2.2.5 Altera dados
 			ShelfRepository.alterShelfElement(id, codigo, capacidade, produto, preco);
 			pratmenu();
 		}
@@ -323,12 +357,12 @@ import io.altar.jseproject.model.Shelf;
 //		Introducao do id da prateleira a pesquisar
 		public static void shelfChars(){
 			System.out.println("Introduza o valor do ID da prateleira que pretende consultar ");
-			int id = Entity.inputId();
+			int id = Shelf.inputIdShelf();
 			ShelfRepository.getShelfDet(id);
 		}
 		
 		//print dos detalhes da prateleira
-		public static void printShelfDetails(int id, int codigo, int capacidade, Integer [] produto, double preco){
+		public static void printShelfDetails(int id, int codigo, int capacidade, Integer produto, double preco){
 			System.out.println("|\tID\t|\tLocalizacao\t|\tCapacidade\t|\tProdutos\t|\tAluguer diario\t|");
 			System.out.println("---------------------------------------------------------------------------------------");
 			System.out.println("|\t" + id + "\t|\t" + codigo + "\t\t|\t" + capacidade + "\t|\t" + produto + "\t|\t" + preco + "\t|");
@@ -341,7 +375,7 @@ import io.altar.jseproject.model.Shelf;
 //		Introducao do id da prateleira a eliminar
 		public static void delShelf(){
 			System.out.println("Insira o Id da prateleira que pretende eliminar");
-			int id = Entity.inputId();
+			int id = Shelf.inputIdShelf();
 			System.out.println("Tem a certeza que prentende eliminar esta prateleira da DB?/n 1 -> Eliminar/n 2 -> Cancelar");
 			Shelf.delElemS(id);
 		}		
@@ -374,7 +408,7 @@ import io.altar.jseproject.model.Shelf;
 			}
 		
 //			Print dos valores
-			public static void printShelfVal(int id, int codigo, int capacidade, Integer [] produto, double preco){
+			public static void printShelfVal(int id, int codigo, int capacidade, Integer produto, double preco){
 				System.out.println("|\t" + id + "\t|\t" + codigo + "\t\t|\t" + capacidade + "\t|\t" + produto + "\t|\t" + preco + "\t|");
 			}
 		

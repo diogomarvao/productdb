@@ -23,7 +23,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 		public static void getShelfElem(int id){
 			int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
 			int capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();
-			Integer [] produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
+			Integer produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
 			double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
 			TextInterface.shelfEdit(id, codigo, capacidade, produto, preco);
 			};	
@@ -33,7 +33,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 		public static void getShelfDet(int id){
 			int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
 			int capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();
-			Integer [] produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
+			Integer produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
 			double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
 			TextInterface.printShelfDetails(id, codigo, capacidade, produto, preco);
 			};	
@@ -41,7 +41,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 			
 //substituir ou adicionar as caraterisiticas no Linked hash map (chamado na TextInterface.java)	
 		
-		public static void alterShelfElement(int id,int codigo, int capacidade, Integer[] produto, double preco) {
+		public static void alterShelfElement(int id,int codigo, int capacidade, Integer produto, double preco) {
 			((Shelf)ShelfRepository.getInstance().get(id)).setCod(codigo);
 			((Shelf)ShelfRepository.getInstance().get(id)).setCap(capacidade);
 			((Shelf)ShelfRepository.getInstance().get(id)).setProd(produto);
@@ -56,7 +56,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 //			 retirar osa valores das variaveis por cada id
 				int codigo = ((Shelf)ShelfRepository.getInstance().get(id)).getCod();
 				int capacidade = ((Shelf)ShelfRepository.getInstance().get(id)).getCap();
-				Integer [] produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
+				Integer produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
 //				int produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
 				double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
 //																						Envia os valores para a TextInterface serem inpressos 

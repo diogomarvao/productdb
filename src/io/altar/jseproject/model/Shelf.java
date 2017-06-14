@@ -13,7 +13,7 @@ import io.altar.jseproject.util.Utils;
 public class Shelf extends Entity {
 		private int codigo;
 		private int capacidade;
-		private Integer [] produto;
+		private Integer produto;
 		private double preco;
 	
 //setters das variaveis	
@@ -26,7 +26,7 @@ public class Shelf extends Entity {
 			this.capacidade=capacidade;
 		}
 		
-		public void setProd(Integer [] produto){
+		public void setProd(Integer produto){
 			this.produto=produto;
 		}
 		
@@ -44,7 +44,7 @@ public class Shelf extends Entity {
 			return this.capacidade;
 		}
 		
-		public Integer [] getProd(){
+		public Integer getProd(){
 			return this.produto;
 		}
 		
@@ -55,7 +55,7 @@ public class Shelf extends Entity {
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
 
-		public Shelf(int codigo, int capacidade, Integer [] produto, double preco) {
+		public Shelf(int codigo, int capacidade, Integer produto, double preco) {
 			this.codigo = codigo;
 			this.capacidade = capacidade;
 			this.produto = produto;
@@ -71,7 +71,7 @@ public class Shelf extends Entity {
 			switch(input){
 			case 1:
 //				O produto � morto na EntityRepository.java
-				EntityRepository.removElem(id);
+				ShelfRepository.getInstance().removElem(id);
 				TextInterface.pratmenu();
 				break;
 			case 2:
@@ -80,5 +80,27 @@ public class Shelf extends Entity {
 			}
 		}
 			
+//inputs de id
+		public static int inputIdShelf(){
+			Scanner getIdInp = new Scanner(System.in);
+			
+			int id = 0;
+			
+			boolean valid = false;
+			while (!valid){
+				while(!getIdInp.hasNextInt()){
+					System.out.println("por favor introduza um caracter numerico");
+					getIdInp.next();
+				}
+				id	= getIdInp.nextInt();
+			if(id<0 || id>ShelfRepository.getInstance().getEntityList().size()){
+					System.out.println("Insira um valor entre " + 1 + " e " + ShelfRepository.getInstance().getEntityList().size() );
+				}else{
+					valid = true;
+				}	
+			}
+			return id;
+		
+		}
 }
 		
