@@ -38,6 +38,7 @@ public class ProductRepository extends EntityRepository<Product>{
 		int iva = ((Product)ProductRepository.getInstance().get(id)).getIva();
 		double pvp = ((Product)ProductRepository.getInstance().get(id)).getPvp();
 		TextInterface.printDetails(id, prat, desconto, iva, pvp);
+		TextInterface.prodmenu();
 		};	
 	
 		

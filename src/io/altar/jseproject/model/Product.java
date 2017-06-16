@@ -61,51 +61,52 @@ public class Product extends Entity {
 
 //	Adicionar produtos nas prateleiras
 		
-		public static ArrayList<Integer> addToPrat(Scanner dados, int id){
-			int i=0;
-//			pedir opiniao
-			boolean newPrat = false;
-			while(!newPrat){
-				while(getPratIdLoc().get(i) == id){
-					
-					for(i=0; i<getPratIdLoc().size(); i++){
-						if(getPratIdLoc().get(i) == id){
-							System.out.println("Indique outra prateleira");
-							id = dados.nextInt();
-						}		
-					}
-					
-				}
-				getPratIdLoc().add(id);
-				int menuinp = Utils.getMenuInp(1,2);
-					switch(menuinp){
-						case 1:
-							newPrat=false; 
-							id = dados.nextInt();
-							break;
-						case 2:
-							newPrat = true;
-							break;
-					}
+		public ArrayList<Integer> addToPrat(Scanner dados, int idPrat, int id){
+			
+			
+			boolean morePrat = false;
+			
+			while (morePrat != true){
 				
-			}
+				if(((Shelf)shelfList.get(idPrat)).getProd() == null){
+					pratIdLoc.add(idPrat);
+					
+					Integer produto = id;
+				((Shelf)shelfList.get(idPrat)).setProd(produto);
+				
+				} else {
+					System.out.println("A prateleira ja tem um produto associado");
+				}
+			
+				
+				System.out.println("Deseja associar o produto a outra Prateleira? \n 1-> Sim\n 2->Nao");
+				int menuinp = Utils.getMenuInp(1, 2);
+				
+				switch(menuinp){
+					case 1:
+						System.out.println("Indique a prateleira que pretende inserir o produto: ");
+						idPrat=dados.nextInt();
+						break;
+						
+					case 2:
+						morePrat = true;
+						break;
+				}
+				}
 			return getPratIdLoc();
+			
 		}
 		
 //	Editar o produto na prateleira	
-		public static int editProdPrat(Scanner dados, int id){
-			int i=0;
-//			pedir opiniao
-			while(getPratIdLoc().get(i) != id){
+		public int editProdPrat(Scanner dados, int id){
+			
+			for(pratIdLoc p : pratIdLoc.size()){
 				
-				for(i=0; i<getPratIdLoc().size(); i++){
-					if(getPratIdLoc().get(i) == id){
-						id = Utils.getSkipDel(dados, id);
-						break;
-					}		
-				}
+				System.out.print(pratIdLoc(p) + " -> ");
+				pratIdLoc(p) = Utils.getSkipDel(dados, id);
 				
 			}
+			
 			int idProd = id;
 			return idProd;
 			
@@ -119,7 +120,7 @@ public class Product extends Entity {
 			this.desconto = desconto;
 			this.iva = iva;
 			this.pvp = pvp;
-			ProductRepository.getInstance().addToList(this);
+			productList.addToList(this);
 		}
 
 		
@@ -130,7 +131,7 @@ public class Product extends Entity {
 			switch(input){
 			case 1:
 //				O produto � morto na EntityRepository.java
-				ProductRepository.getInstance().removElem(id);
+				productList.removElem(id);
 				TextInterface.prodmenu();
 				break;
 			case 2:
@@ -152,8 +153,8 @@ public class Product extends Entity {
 					getIdInp.next();
 				}
 				id	= getIdInp.nextInt();
-			if(id<0 || id>ProductRepository.getInstance().getEntityList().size()){
-					System.out.println("Insira um valor entre " + 1 + " e " + ProductRepository.getInstance().getEntityList().size() );
+			if(id<0 || id>productList.getEntityList().size()){
+					System.out.println("Insira um valor entre " + 1 + " e " + productList.getEntityList().size() );
 				}else{
 					valid = true;
 				}	

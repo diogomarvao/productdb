@@ -36,6 +36,7 @@ public class ShelfRepository extends EntityRepository <Shelf>{
 			Integer produto = ((Shelf)ShelfRepository.getInstance().get(id)).getProd();
 			double preco = ((Shelf)ShelfRepository.getInstance().get(id)).getPreco();
 			TextInterface.printShelfDetails(id, codigo, capacidade, produto, preco);
+			TextInterface.pratmenu();
 			};	
 		
 			

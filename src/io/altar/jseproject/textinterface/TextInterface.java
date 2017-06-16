@@ -78,6 +78,7 @@ import io.altar.jseproject.util.Utils;
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
 			ArrayList<Integer> pratIdLoc= new ArrayList<>();
+			int id = productList.getNextId();
 			Integer idPrat=0;
 			
 //		1.1 inserir produtos nas prateleiras	
@@ -88,22 +89,14 @@ import io.altar.jseproject.util.Utils;
 			switch(menuinp){
 				case 1: 
 
-					if(ShelfRepository.getInstance() == null){
+					if(shelfList == null){
 						System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
 					}else{	
 						System.out.println("Indique a prateleira que pretende inserir o produto: ");
-						Product.addToPrat(dados, idPrat);
-							
-//				As prateleiras estao vazias?
-//						- Sim
-//						if(getPratIdLoc().size() < shelfList.get(idPrat).getCap()){
-////PEDIR OPINIAO AQUI!!!!
-//							Product.addToPrat(dados, idPrat);
-//							
-////				-		 Nao
-//						} else {
-//							System.out.println("A prateleira esta cheia");
-//						}
+						idPrat=dados.nextInt();
+						Product productObject = new Product(pratIdLoc, menuinp, menuinp, menuinp);
+						productObject.addToPrat(dados, idPrat, id);
+
 					}
 			
 				break;
@@ -168,7 +161,6 @@ import io.altar.jseproject.util.Utils;
 				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
 				
 			}else{	
-				System.out.print(pratIdLoc + " -> ");
 				Product.editProdPrat(dados, idProd);
 				
 			}
@@ -240,7 +232,7 @@ import io.altar.jseproject.util.Utils;
 		public static void delProd(){
 			System.out.println("Insira o Id do produto que pretende eliminar");
 			int id = Product.inputIdProd();
-			System.out.println("Tem a certeza que prentende eliminar este produto da DB?/n 1 -> Eliminar/n 2 -> Cancelar");
+			System.out.println("Tem a certeza que prentende eliminar este produto da DB?\n 1 -> Eliminar\n 2 -> Cancelar");
 			Product.delElemP(id);
 		}		
 				
