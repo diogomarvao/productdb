@@ -78,7 +78,9 @@ import io.altar.jseproject.util.Utils;
 		public static void newProd(){
 			Scanner dados = new Scanner(System.in);
 			ArrayList<Integer> pratIdLoc= new ArrayList<>();
-			int id = productList.getNextId();
+	
+			int id=0;
+//			ProductRepository.getInstance().keySet();
 			Integer idPrat=0;
 			
 //		1.1 inserir produtos nas prateleiras	
@@ -91,11 +93,13 @@ import io.altar.jseproject.util.Utils;
 
 					if(shelfList == null){
 						System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
+						
 					}else{	
 						System.out.println("Indique a prateleira que pretende inserir o produto: ");
+						
 						idPrat=dados.nextInt();
-						Product productObject = new Product(pratIdLoc, menuinp, menuinp, menuinp);
-						productObject.addToPrat(dados, idPrat, id);
+						
+						pratIdLoc =	Product.addToPrat(dados, idPrat, id);
 
 					}
 			
@@ -161,7 +165,9 @@ import io.altar.jseproject.util.Utils;
 				System.out.println("Nao ha prateleiras criadas, por favor crie uma prateleira");
 				
 			}else{	
-				Product.editProdPrat(dados, idProd);
+				
+				
+				pratIdLoc = Product.editProdPrat(dados, idProd);
 				
 			}
 			
@@ -280,20 +286,20 @@ import io.altar.jseproject.util.Utils;
 			Scanner dados = new Scanner(System.in);
 			
 //		1.1 localizacao
-			System.out.println("Insira a localizacao da parteleira: ");
+			System.out.println("Insira a localizacao da prateleira: ");
 			int codigo = dados.nextInt();
 			
 //		1.2 Capacidade da prateleira
-			System.out.println("Insira a capacidade da parteleira: ");
+			System.out.println("Insira a capacidade da prateleira: ");
 			int capacidade = dados.nextInt();
 			
 //		1.3 Inserir produtos na shelf
-			System.out.println("Insira o ID do produto: ");
+			System.out.println("Insira o ID do produto que pretende associar a prateleira: ");
 			
-//			placeholder
-			Integer produto= 0;
-//							
-		
+			int idProd = Utils.getMenuInp(0,Product.getPratIdLoc().size());
+			
+			Integer produto = Shelf.addProdToPrat(idProd);
+			
 			
 //		1.4 preco de aluguer
 			System.out.println("Insira o preco de aluguer diario de localizacao: ");

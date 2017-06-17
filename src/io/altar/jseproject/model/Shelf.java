@@ -52,6 +52,35 @@ public class Shelf extends Entity {
 			return this.preco;
 		}
 		
+
+//		Adicionar produtos nas prateleiras
+		
+			public Integer addProdToPrat(Integer id){
+				
+				Product.getPratIdLoc().add(produto);
+				produto = id;
+				
+				return produto;
+				
+			}
+			
+//		Editar o produto na prateleira	
+			public int editProdPrat(Scanner dados, int id){
+				
+				for(Integer p : Product.getPratIdLoc()){
+					
+					if(p == produto){
+						Product.getPratIdLoc().remove(p);
+					}
+						
+				}
+				
+				produto = Utils.getMenuInp(0 , ProductRepository.getInstance().keySet().size() );
+
+				return produto;
+				
+			}
+
 		
 //adicionar a parteleira criada ao repositorio shelfRepository
 
@@ -72,6 +101,19 @@ public class Shelf extends Entity {
 			case 1:
 //				O produto � morto na EntityRepository.java
 				ShelfRepository.getInstance().removElem(id);
+				
+				for(Integer p : ProductRepository.getInstance().keySet()){
+					
+					for(Integer s : Product.getPratIdLoc().size() ){	
+						
+						if(id == Product.getPratIdLoc().get(s)){
+							Product.getPratIdLoc().remove(s);
+						}
+						
+					}
+					
+				}
+				
 				TextInterface.pratmenu();
 				break;
 			case 2:

@@ -71,9 +71,9 @@ public class Product extends Entity {
 				if(((Shelf)shelfList.get(idPrat)).getProd() == null){
 					pratIdLoc.add(idPrat);
 					
-					Integer produto = id;
-				((Shelf)shelfList.get(idPrat)).setProd(produto);
-				
+//					Integer produto = id;
+//				((Shelf)shelfList.get(idPrat)).setProd(produto);
+//				
 				} else {
 					System.out.println("A prateleira ja tem um produto associado");
 				}
@@ -92,26 +92,25 @@ public class Product extends Entity {
 						morePrat = true;
 						break;
 				}
-				}
+			}
 			return getPratIdLoc();
 			
 		}
 		
 //	Editar o produto na prateleira	
-		public int editProdPrat(Scanner dados, int id){
+		public ArrayList<Integer> editProdPrat(Scanner dados, int id){
 			
-			for(pratIdLoc p : pratIdLoc.size()){
+			for(Integer p : pratIdLoc){
 				
-				System.out.print(pratIdLoc(p) + " -> ");
-				pratIdLoc(p) = Utils.getSkipDel(dados, id);
+				System.out.print(p + " -> ");
+				p = Utils.getSkipDel(dados, id);
 				
 			}
 			
-			int idProd = id;
-			return idProd;
+			return pratIdLoc;
 			
 		}
-
+		
 
 //adicionar a parteleira criada ao repositorio shelfRepository
 
@@ -132,6 +131,20 @@ public class Product extends Entity {
 			case 1:
 //				O produto � morto na EntityRepository.java
 				productList.removElem(id);
+				
+				
+				for(Integer p : ShelfRepository.getInstance().keySet()){
+					
+					Integer produto = ((Shelf)ShelfRepository.getInstance().get(p)).getProd();
+					
+					if(id == produto){
+						
+						produto = null;
+						
+					}
+					
+				}
+	
 				TextInterface.prodmenu();
 				break;
 			case 2:

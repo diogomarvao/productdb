@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Utils {
 	
-	//Input menus com verificacao (in)
+	//Input menus com verificacao (int)
 			public static int getMenuInp(int min, int max){
 				
 				Scanner scanner = new Scanner(System.in);	
@@ -48,7 +48,6 @@ public class Utils {
 				return menuinp;
 			}	
 			
-		
 				
 	//Skip com enter int	
 			public static int getSkipInt(Scanner dados, int y){
@@ -76,7 +75,7 @@ public class Utils {
 					};
 
 	//Skip com enter para delete (lista de produtos e prateleiras)	
-				public static int getSkipDel(Scanner dados, int y){
+				public static Integer getSkipDel(Scanner dados, Integer y){
 					String x = dados.nextLine();
 					
 					if(dados.equals("") || dados.equals(" ")){
